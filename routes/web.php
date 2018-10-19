@@ -14,3 +14,24 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+// Ranks
+$router->get('ranks', [
+   'uses' => 'RankController@index',
+]);
+
+$router->post('ranks', [
+    'uses' => 'RankController@store',
+]);
+
+$router->get('ranks/{id}', [
+    'uses' => 'RankController@show',
+]);
+
+$router->patch('ranks/{id}', [
+    'uses' => 'RankController@update',
+]);
+
+$router->delete('ranks/{id}', [
+    'uses' => 'RankController@destroy',
+]);
