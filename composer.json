@@ -9,7 +9,8 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "nesbot/carbon": "1.24.1",
-        "league/fractal": "^0.17.0"
+        "league/fractal": "^0.17.0",
+        "darkaonline/swagger-lume": "5.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
