@@ -5,6 +5,30 @@
         "version": "0.1"
     },
     "paths": {
+        "/auth": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate a user.",
+                "operationId": "authAuthenticate",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AuthRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Access token."
+                    }
+                }
+            }
+        },
         "/ranks": {
             "get": {
                 "tags": [
@@ -154,6 +178,18 @@
             "properties": {
                 "name": {
                     "description": "Class Rank",
+                    "type": "string"
+                }
+            }
+        },
+        "AuthRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Class User",
                     "type": "string"
                 }
             }

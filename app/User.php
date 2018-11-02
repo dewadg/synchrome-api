@@ -7,7 +7,24 @@ use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Swagger\Annotations as SWG;
 
+/**
+ * Class User
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="AuthRequest",
+ *     @SWG\Property(
+ *          property="name",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="password",
+ *          type="string"
+ *     )
+ * )
+ */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
