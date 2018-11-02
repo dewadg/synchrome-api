@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Exceptions\Auth\ExpiredAccessTokenException;
+use App\Exceptions\Auth\InvalidAccessTokenException;
 use App\Services\AuthService;
 use App\User;
 use Illuminate\Support\Facades\Gate;
@@ -36,7 +38,13 @@ class AuthServiceProvider extends ServiceProvider
 
                 list($username, $password) = explode(':', base64_decode($token));
 
-                return $service->authorize($username, $password);
+                try {
+                    return $service->authorize($username, $password);
+                } catch (InvalidAccessTokenException $e) {
+                    return null;
+                } catch (ExpiredAccessTokenException $e) {
+                    return null;
+                }
             }
         });
     }
