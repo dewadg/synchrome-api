@@ -15,4 +15,11 @@ class Access extends Model
         'id',
         'name',
     ];
+
+    /**
+     * Disable timestamps.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

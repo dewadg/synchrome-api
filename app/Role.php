@@ -17,6 +17,13 @@ class Role extends Model
     ];
 
     /**
+     * Disable timestamps.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * This role's accesses.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
