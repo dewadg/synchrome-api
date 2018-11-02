@@ -12,6 +12,13 @@ class IndexController extends RestController
      *     version="0.1"
      * )
      *
+     * @SWG\SecurityScheme(
+     *     securityDefinition="basicAuth",
+     *     type="basic",
+     *     description="Authenticates via HTTP Basic",
+     *     name="authorization"
+     * )
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()

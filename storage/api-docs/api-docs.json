@@ -4,6 +4,166 @@
         "title": "Synchrome API",
         "version": "0.1"
     },
-    "paths": {},
-    "definitions": {}
+    "paths": {
+        "/ranks": {
+            "get": {
+                "tags": [
+                    "Ranks"
+                ],
+                "summary": "Fetch list of ranks.",
+                "operationId": "ranksIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of ranks."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Ranks"
+                ],
+                "summary": "Create a new rank.",
+                "operationId": "ranksStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateRankRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/ranks/{id}": {
+            "get": {
+                "tags": [
+                    "Ranks"
+                ],
+                "summary": "Fetch list of ranks.",
+                "operationId": "ranksShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A rank."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Ranks"
+                ],
+                "summary": "Delete a rank.",
+                "operationId": "ranksDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Ranks"
+                ],
+                "summary": "Update a rank.",
+                "operationId": "ranksUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateRankRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "CreateRankRequest": {
+            "properties": {
+                "id": {
+                    "description": "Class Rank",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Class Rank",
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateRankRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Rank",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "basicAuth": {
+            "type": "basic",
+            "description": "Authenticates via HTTP Basic",
+            "name": "authorization"
+        }
+    }
 }

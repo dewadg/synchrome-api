@@ -7,12 +7,25 @@ use App\Transformers\RankTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Swagger\Annotations as SWG;
 
 class RankController extends RestController
 {
     protected $transformer_name = RankTransformer::class;
 
     /**
+     * @SWG\Get(
+     *     path="/ranks",
+     *     tags={"Ranks"},
+     *     operationId="ranksIndex",
+     *     summary="Fetch list of ranks.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="List of ranks."
+     *     )
+     * )
+     *
      * @param RankService $service
      * @return \Illuminate\Http\JsonResponse
      */
@@ -22,6 +35,24 @@ class RankController extends RestController
     }
 
     /**
+     * @SWG\Post(
+     *     path="/ranks",
+     *     tags={"Ranks"},
+     *     operationId="ranksStore",
+     *     summary="Create a new rank.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CreateRankRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     )
+     * )
+     *
      * @param RankService $service
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -46,6 +77,24 @@ class RankController extends RestController
     }
 
     /**
+     * @SWG\Get(
+     *     path="/ranks/{id}",
+     *     tags={"Ranks"},
+     *     operationId="ranksShow",
+     *     summary="Fetch list of ranks.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="A rank."
+     *     )
+     * )
+     *
      * @param RankService $service
      * @param $id
      * @return \Illuminate\Http\JsonResponse
@@ -60,6 +109,30 @@ class RankController extends RestController
     }
 
     /**
+     * @SWG\Patch(
+     *     path="/ranks/{id}",
+     *     tags={"Ranks"},
+     *     operationId="ranksUpdate",
+     *     summary="Update a rank.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateRankRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     )
+     * )
+     *
      * @param RankService $service
      * @param Request $request
      * @param $id
@@ -86,6 +159,24 @@ class RankController extends RestController
     }
 
     /**
+     * @SWG\Delete(
+     *     path="/ranks/{id}",
+     *     tags={"Ranks"},
+     *     operationId="ranksDestroy",
+     *     summary="Delete a rank.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted."
+     *     )
+     * )
+     *
      * @param RankService $service
      * @param $id
      * @return \Illuminate\Http\JsonResponse
