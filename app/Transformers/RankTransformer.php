@@ -7,6 +7,12 @@ use App\Rank;
 
 class RankTransformer extends TransformerAbstract
 {
+    /**
+     * Transforms the model.
+     *
+     * @param Rank $rank
+     * @return array
+     */
     public function transform(Rank $rank)
     {
         return [

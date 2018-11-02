@@ -12,6 +12,9 @@ class RankService
      */
     protected $repo;
 
+    /**
+     * RankService constructor.
+     */
     public function __construct()
     {
         $this->repo = new RankRepo;

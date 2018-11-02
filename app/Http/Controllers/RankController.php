@@ -12,11 +12,20 @@ class RankController extends RestController
 {
     protected $transformer_name = RankTransformer::class;
 
+    /**
+     * @param RankService $service
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index(RankService $service)
     {
         return $this->sendCollection($service->get());
     }
 
+    /**
+     * @param RankService $service
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(RankService $service, Request $request)
     {
         $this->validate($request, [
@@ -36,6 +45,11 @@ class RankController extends RestController
         }
     }
 
+    /**
+     * @param RankService $service
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function show(RankService $service, $id)
     {
         try {
@@ -45,6 +59,12 @@ class RankController extends RestController
         }
     }
 
+    /**
+     * @param RankService $service
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(RankService $service, Request $request, $id)
     {
         $this->validate($request, ['name' => 'required']);
@@ -65,6 +85,11 @@ class RankController extends RestController
         }
     }
 
+    /**
+     * @param RankService $service
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(RankService $service, $id)
     {
         try {
