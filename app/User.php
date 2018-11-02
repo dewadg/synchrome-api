@@ -43,4 +43,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * This user's access tokens.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function accessTokens()
+    {
+        return $this->hasMany(AccessToken::class);
+    }
 }
