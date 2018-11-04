@@ -11,6 +11,11 @@
 |
 */
 
+/** Allow OPTIONS request */
+$router->options('{all:.*}', function () {
+    return response()->json(null, 200);
+});
+
 $router->get('/', 'IndexController@index');
 
 // Auth
