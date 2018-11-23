@@ -20,7 +20,11 @@ $router->get('/', 'IndexController@index');
 
 // Auth
 $router->post('auth', [
-   'uses' => 'AuthController@authenticate',
+    'uses' => 'AuthController@authenticate',
+]);
+$router->get('whoami', [
+    'uses' => 'IndexController@whoami',
+    'middleware' => ['auth'],
 ]);
 
 // Ranks

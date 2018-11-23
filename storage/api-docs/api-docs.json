@@ -29,6 +29,25 @@
                 }
             }
         },
+        "/whoami": {
+            "get": {
+                "tags": [
+                    "Who Am I"
+                ],
+                "summary": "Fetch current logged user.",
+                "operationId": "whoami",
+                "responses": {
+                    "200": {
+                        "description": "Current logged user."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/ranks": {
             "get": {
                 "tags": [
