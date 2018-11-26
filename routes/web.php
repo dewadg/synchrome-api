@@ -52,3 +52,29 @@ $router->delete('ranks/{id}', [
     'uses' => 'RankController@destroy',
     'middleware' => ['auth'],
 ]);
+
+// Roles
+$router->get('roles', [
+    'uses' => 'RoleController@index',
+    'middleware' => ['auth'],
+]);
+
+$router->post('roles', [
+    'uses' => 'RoleController@store',
+    'middleware' => ['auth'],
+]);
+
+$router->get('roles/{id}', [
+    'uses' => 'RoleController@show',
+    'middleware' => ['auth'],
+]);
+
+$router->patch('roles/{id}', [
+    'uses' => 'RoleController@update',
+    'middleware' => ['auth'],
+]);
+
+$router->delete('roles/{id}', [
+    'uses' => 'RoleController@destroy',
+    'middleware' => ['auth'],
+]);

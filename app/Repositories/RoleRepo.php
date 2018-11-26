@@ -8,7 +8,7 @@ class RoleRepo
 {
     public function get()
     {
-        return Role::get(['id', 'name']);
+        return Role::with('accesses')->get(['id', 'name']);
     }
 
     public function find($id)
