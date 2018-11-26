@@ -39,22 +39,6 @@ class RoleService
     }
 
     /**
-     * Checks whether access ID available.
-     *
-     * @param $id
-     * @return bool
-     */
-    protected function accessIdExists($id)
-    {
-        $available_ids = $this->access_repo->get()
-            ->map(function ($item) {
-                return $item->id;
-            });
-
-        return $available_ids->has($id);
-    }
-
-    /**
      * Creates a role.
      *
      * @param array $data
