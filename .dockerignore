@@ -1,0 +1,3 @@
+/vendor
+/storage/logs/lumen.log
+.env
