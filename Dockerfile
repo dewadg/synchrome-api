@@ -8,10 +8,13 @@ RUN mv composer.phar /usr/local/bin/composer
 ADD . /home/synchrome/lumen
 ADD ./deploy/nginx/config/nginx.conf /config/nginx/site-confs/default
 
-RUN chown -R 'abc':'abc' /home/synchrome
-
 WORKDIR /home/synchrome/lumen
 
 # Install dependencies
 RUN composer install
 RUN composer dump-autoload
+
+RUN chgrp -R 1003 /home/synchrome/lumen .
+RUN chmod -R ug+rwx storage
+
+RUN cp .env.production .env
