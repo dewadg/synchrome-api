@@ -3,18 +3,9 @@ version: "3.6"
 services:
   nginx:
     container_name: synchrome_nginx
-    build: ./deploy/nginx
-    command: nginx -g "daemon off;"
-    links:
-      - php
+    build: .
     ports:
       - "80:80"
       - "443:443"
-
-  php:
-    container_name: synchrome_php
-    build: .
-    command: php-fpm
-    restart: always
     env_file:
       - .env.production

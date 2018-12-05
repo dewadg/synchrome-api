@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Access;
+use App\User;
 
-class AccessRepo implements RepositoryInterface
+class UserRepo implements RepositoryInterface
 {
     public function get()
     {
-        return Access::get(['id', 'name']);
+        return User::with('role')->get();
     }
 
     public function find($id)
     {
-        return Access::findOrFail($id);
+        return User::findOrFail($id);
     }
 
     public function delete($id)
