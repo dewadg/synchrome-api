@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Access;
 
-class AccessRepo
+class AccessRepo implements RepositoryInterface
 {
     public function get()
     {
