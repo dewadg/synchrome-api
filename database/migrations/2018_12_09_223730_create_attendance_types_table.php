@@ -14,7 +14,8 @@ class CreateAttendanceTypesTable extends Migration
     public function up()
     {
         Schema::create('attendance_types', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('id');
+            $table->primary('id');
             $table->string('name');
             $table->boolean('status');
             $table->boolean('tpp_paid');

@@ -14,7 +14,7 @@ class UpdateAttendanceTypesTableAddParentAttendanceTypeIdColumn extends Migratio
     public function up()
     {
         Schema::table('attendance_types', function (Blueprint $table) {
-            $table->unsignedInteger('parent_attendance_type_id')->nullable();
+            $table->string('parent_attendance_type_id')->nullable();
             $table->foreign('parent_attendance_type_id')
                 ->references('id')
                 ->on('attendance_types');
