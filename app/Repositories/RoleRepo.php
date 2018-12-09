@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Role;
 
-class RoleRepo
+class RoleRepo implements RepositoryInterface
 {
     public function get()
     {
