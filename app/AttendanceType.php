@@ -13,6 +13,7 @@ class AttendanceType extends Model
      */
     protected $fillable = [
         'id',
+        'parent_attendance_type_id',
         'name',
     ];
 }
