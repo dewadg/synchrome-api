@@ -30,6 +30,16 @@ class CalendarService
     }
 
     /**
+     * Returns all calendars.
+     *
+     * @return Collection
+     */
+    public function get()
+    {
+        return $this->repo->get();
+    }
+
+    /**
      * Creates new calendar.
      *
      * @param array $data
