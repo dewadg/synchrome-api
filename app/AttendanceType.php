@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AttendanceType extends Model
 {
+    public $incrementing = false;
+    
     /**
      * Attributes that are mass assignable.
      *
