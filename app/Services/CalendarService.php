@@ -7,6 +7,7 @@ use App\CalendarEvent;
 use App\Repositories\AttendanceTypeRepo;
 use App\Repositories\CalendarRepo;
 use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CalendarService
 {
@@ -156,11 +157,16 @@ class CalendarService
      * @param  $event_id
      * @param array $data
      * @return Calendar
+     * @throws ModelNotFoundException
      */
     public function updateEvent($calendar_id, $event_id, array $data)
     {
         $calendar = $this->repo->find($calendar_id);
         $event = $calendar->events()->find($event_id);
+
+        if (is_null($event)) {
+            throw new ModelNotFoundException;
+        }
 
         $event->update([
             'name' => $data['name'],
@@ -180,12 +186,19 @@ class CalendarService
      * @param $calendar_id
      * @param $event_id
      * @return boolean
+     * @throws ModelNotFoundException
      */
     public function deleteEvent($calendar_id, $event_id)
     {
-        return CalendarEvent::where([
+        $event = CalendarEvent::where([
             'id' => $event_id,
             'calendar_id' => $calendar_id,
-        ])->delete() === 1 ? true : false;
+        ])->first();
+
+        if (is_null($event)) {
+            throw new ModelNotFoundException;
+        }
+
+        return $event->delete();
     }
 }
