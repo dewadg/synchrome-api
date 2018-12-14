@@ -5,6 +5,25 @@
         "version": "0.1"
     },
     "paths": {
+        "/attendance-types": {
+            "get": {
+                "tags": [
+                    "AttendanceTypes"
+                ],
+                "summary": "Fetch list of attendance types.",
+                "operationId": "attendanceTypesIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of attendance types."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/auth": {
             "post": {
                 "tags": [

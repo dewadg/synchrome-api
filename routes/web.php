@@ -79,6 +79,12 @@ $router->delete('roles/{id}', [
     'middleware' => ['auth'],
 ]);
 
+// AttendanceTypes
+$router->get('attendance-types', [
+    'uses' => 'AttendanceTypeController@index',
+    'middleware' => ['auth'],
+]);
+
 // Calendars
 $router->get('calendars', [
     'uses' => 'CalendarController@index',
