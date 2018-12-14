@@ -14,7 +14,7 @@ WORKDIR /home/synchrome/lumen
 RUN composer install
 RUN composer dump-autoload
 
-RUN chgrp -R 1003 /home/synchrome/lumen .
+RUN chgrp -R 1002 /home/synchrome/lumen .
 RUN chmod -R ug+rwx storage
 
 RUN cp .env.production .env
