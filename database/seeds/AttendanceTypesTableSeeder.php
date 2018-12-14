@@ -115,6 +115,14 @@ class AttendanceTypesTableSeeder extends Seeder
             'meal_allowance_paid' => false,
             'manual_input' => true,
         ],
+        [
+            'id' => 'L',
+            'name' => 'Libur',
+            'status' => false,
+            'tpp_paid' => true,
+            'meal_allowance_paid' => false,
+            'manual_input' => false,
+        ],
     ];
 
     /**
