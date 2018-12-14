@@ -78,3 +78,13 @@ $router->delete('roles/{id}', [
     'uses' => 'RoleController@destroy',
     'middleware' => ['auth'],
 ]);
+
+// Calendars
+$router->get('calendars', [
+    'uses' => 'CalendarController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('calendars', [
+    'uses' => 'CalendarController@store',
+    'middleware' => ['auth'],
+]);
