@@ -193,6 +193,33 @@ class CalendarController extends RestController
         }
     }
 
+    /**
+     * @SWG\Delete(
+     *     path="/calendars/{id}",
+     *     tags={"Calendars"},
+     *     operationId="calendarsDestroy",
+     *     summary="Delete a calendar.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
+     *     )
+     * )
+     *
+     * @param CalendarService $service
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function destroy(CalendarService $service, $id)
     {
         try {

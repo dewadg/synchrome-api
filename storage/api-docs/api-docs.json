@@ -107,6 +107,34 @@
                     }
                 ]
             },
+            "delete": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Delete a calendar.",
+                "operationId": "calendarsDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
             "patch": {
                 "tags": [
                     "Calendars"
