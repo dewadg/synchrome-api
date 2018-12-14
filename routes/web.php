@@ -100,3 +100,15 @@ $router->delete('calendars/{id}', [
     'uses' => 'CalendarController@destroy',
     'middleware' => ['auth'],
 ]);
+$router->get('calendars/{id}/events', [
+    'uses' => 'CalendarController@getEvents',
+    'middleware' => ['auth'],
+]);
+$router->post('calendars/{id}/events', [
+    'uses' => 'CalendarController@addEvent',
+    'middleware' => ['auth'],
+]);
+$router->delete('calendars/{calendar_id}/events/{event_id}', [
+    'uses' => 'CalendarController@deleteEvent',
+    'middleware' => ['auth'],
+]);

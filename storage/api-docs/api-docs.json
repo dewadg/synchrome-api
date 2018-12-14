@@ -172,6 +172,144 @@
                 ]
             }
         },
+        "/calendars/{id}/events": {
+            "get": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Fetch list of events of a calendar.",
+                "operationId": "calendarsGetEvents",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Events list."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Create a new event of a calendar.",
+                "operationId": "calendarsEventStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateCalendarEventRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/calendars/{calendar_id}/events/{event_id}": {
+            "delete": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Delete a calendar.",
+                "operationId": "calendarsEventDestroy",
+                "parameters": [
+                    {
+                        "name": "calendar_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Update an event of a calendar.",
+                "operationId": "calendarsEventUpdate",
+                "parameters": [
+                    {
+                        "name": "calendar_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateCalendarEventRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Created."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/whoami": {
             "get": {
                 "tags": [
@@ -507,6 +645,46 @@
                     "type": "string"
                 },
                 "end": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                }
+            }
+        },
+        "CreateCalendarEventRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "start": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "end": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "attendanceTypeId": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateCalendarEventRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "start": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "end": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "attendanceTypeId": {
                     "description": "Class Calendar",
                     "type": "string"
                 }
