@@ -15,5 +15,21 @@ class AttendanceType extends Model
         'id',
         'parent_attendance_type_id',
         'name',
+        'status',
+        'tpp_paid',
+        'meal_allowance_paid',
+        'manual_input',
+    ];
+
+    /**
+     * Casted attributes.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'tpp_paid' => 'boolean',
+        'meal_allowance_paid' => 'boolean',
+        'manual_input' => 'boolean',
     ];
 }
