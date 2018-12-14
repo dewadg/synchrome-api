@@ -3,4 +3,3 @@
 /storage/app
 /storage/logs/lumen.log
 .env
-.env.production
