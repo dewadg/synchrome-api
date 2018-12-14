@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\CalendarService;
 use App\Transformers\CalendarTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class CalendarController extends RestController
@@ -32,11 +33,31 @@ class CalendarController extends RestController
     }
 
     /**
-     * Undocumented function
+     * @SWG\Post(
+     *     path="/calendars",
+     *     tags={"Calendars"},
+     *     operationId="calendarsStore",
+     *     summary="Create a new calendar.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CreateCalendarRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Internal server error."
+     *     )
+     * )
      *
      * @param Request $request
      * @param CalendarService $service
-     * @return void
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, CalendarService $service)
     {
@@ -72,6 +93,114 @@ class CalendarController extends RestController
             $calendar = $service->create($calendar_data, $events_data);
 
             return $this->sendItem($calendar, null, 201);
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * @SWG\Get(
+     *     path="/calendars/{id}",
+     *     tags={"Calendars"},
+     *     operationId="calendarsShow",
+     *     summary="Fetch list of calendars.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="A calendar."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
+     *     )
+     * )
+     *
+     * @param CalendarService $service
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function find(CalendarService $service, $id)
+    {
+        try {
+            $calendar = $service->find($id);
+
+            return $this->sendItem($calendar);
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('calendar_not_found');
+        }
+    }
+
+    /**
+     * @SWG\Patch(
+     *     path="/calendars/{id}",
+     *     tags={"Calendars"},
+     *     operationId="calendarsUpdate",
+     *     summary="Update a calendar.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateCalendarRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     ),
+     *     @SWG\Response(
+     *         response=500,
+     *         description="Internal server error."
+     *     ),
+     * )
+     *
+     * @param CalendarService $service
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(CalendarService $service, Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'start' => 'required|date',
+            'end' => 'required|date',
+        ]);
+
+        try {
+            $calendar = $service->update($id, [
+                'name' => $request->input('name'),
+                'start' => $request->input('start'),
+                'end' => $request->input('end'),
+            ]);
+
+            return $this->sendItem($calendar);
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('Calendar not found');
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
+
+    public function destroy(CalendarService $service, $id)
+    {
+        try {
+            $service->delete($id);
+
+            return $this->response();
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('calendar_not_found');
         } catch (\Exception $e) {
             return $this->iseResponse($e->getMessage());
         }

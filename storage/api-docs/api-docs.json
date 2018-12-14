@@ -29,6 +29,121 @@
                 }
             }
         },
+        "/calendars": {
+            "get": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Fetch list of calendars.",
+                "operationId": "calendarsIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of calendars."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Create a new calendar.",
+                "operationId": "calendarsStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateCalendarRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/calendars/{id}": {
+            "get": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Fetch list of calendars.",
+                "operationId": "calendarsShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A calendar."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Calendars"
+                ],
+                "summary": "Update a calendar.",
+                "operationId": "calendarsUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateCalendarRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/whoami": {
             "get": {
                 "tags": [
@@ -178,9 +293,197 @@
                     }
                 ]
             }
+        },
+        "/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Fetch list of roles.",
+                "operationId": "rolesIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of roles."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Create a new rank.",
+                "operationId": "rolesStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Fetch list of roles.",
+                "operationId": "rolesShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A rank."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Delete a rank.",
+                "operationId": "rolesDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Update a rank.",
+                "operationId": "rolesUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {
+        "CreateCalendarRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "start": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "end": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "events": {
+                    "description": "Class Calendar",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "name": {
+                                "description": "Class Calendar",
+                                "type": "string"
+                            },
+                            "start": {
+                                "description": "Class Calendar",
+                                "type": "string"
+                            },
+                            "end": {
+                                "description": "Class Calendar",
+                                "type": "string"
+                            },
+                            "attendanceTypeId": {
+                                "description": "Class Calendar",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "UpdateCalendarRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "start": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                },
+                "end": {
+                    "description": "Class Calendar",
+                    "type": "string"
+                }
+            }
+        },
         "CreateRankRequest": {
             "properties": {
                 "id": {
@@ -198,6 +501,36 @@
                 "name": {
                     "description": "Class Rank",
                     "type": "string"
+                }
+            }
+        },
+        "CreateRoleRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Role",
+                    "type": "string"
+                },
+                "accesses": {
+                    "description": "Class Role",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "UpdateRoleRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Role",
+                    "type": "string"
+                },
+                "accesses": {
+                    "description": "Class Role",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
                 }
             }
         },

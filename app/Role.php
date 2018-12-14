@@ -4,6 +4,36 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Role
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="CreateRoleRequest",
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="accesses",
+ *         type="array",
+ *         @SWG\Items(type="number")
+ *     )
+ * )
+ *
+ * @SWG\Definition(
+ *     definition="UpdateRoleRequest",
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="accesses",
+ *         type="array",
+ *         @SWG\Items(type="number")
+ *     )
+ * )
+ */
 class Role extends Model
 {
     /**

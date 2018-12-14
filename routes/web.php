@@ -88,3 +88,15 @@ $router->post('calendars', [
     'uses' => 'CalendarController@store',
     'middleware' => ['auth'],
 ]);
+$router->get('calendars/{id}', [
+    'uses' => 'CalendarController@find',
+    'middleware' => ['auth'],
+]);
+$router->patch('calendars/{id}', [
+    'uses' => 'CalendarController@update',
+    'middleware' => ['auth'],
+]);
+$router->delete('calendars/{id}', [
+    'uses' => 'CalendarController@destroy',
+    'middleware' => ['auth'],
+]);
