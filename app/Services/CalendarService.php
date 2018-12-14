@@ -151,7 +151,7 @@ class CalendarService
     {
         $calendar = $this->repo->find($calendar_id);
         $event = $calendar->events()->find($event_id);
-        
+
         $event->update([
             'name' => $data['name'],
             'start' => $data['start'],
