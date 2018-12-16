@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @SWG\Definition(
  *     definition="CreateCalendarEventRequest",
  *     @SWG\Property(
- *         property="name",
+ *         property="title",
  *         type="string"
  *     ),
  *     @SWG\Property(
@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @SWG\Definition(
  *     definition="UpdateCalendarEventRequest",
  *     @SWG\Property(
- *         property="name",
+ *         property="title",
  *         type="string"
  *     ),
  *     @SWG\Property(
@@ -59,7 +59,7 @@ class CalendarEvent extends Model
         'id',
         'calendar_id',
         'attendance_type_id',
-        'name',
+        'title',
         'start',
         'end',
     ];

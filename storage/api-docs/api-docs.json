@@ -643,6 +643,10 @@
                                 "description": "Class Calendar",
                                 "type": "string"
                             },
+                            "published": {
+                                "description": "Class Calendar",
+                                "type": "number"
+                            },
                             "attendanceTypeId": {
                                 "description": "Class Calendar",
                                 "type": "string"
@@ -666,12 +670,16 @@
                 "end": {
                     "description": "Class Calendar",
                     "type": "string"
+                },
+                "published": {
+                    "description": "Class Calendar",
+                    "type": "number"
                 }
             }
         },
         "CreateCalendarEventRequest": {
             "properties": {
-                "name": {
+                "title": {
                     "description": "Class Calendar",
                     "type": "string"
                 },
@@ -691,7 +699,7 @@
         },
         "UpdateCalendarEventRequest": {
             "properties": {
-                "name": {
+                "title": {
                     "description": "Class Calendar",
                     "type": "string"
                 },

@@ -68,7 +68,7 @@ class CalendarController extends RestController
             'end' => 'required|date',
             'published' => 'required|boolean',
             'events' => 'required|array',
-            'events.*.name' => 'required',
+            'events.*.title' => 'required',
             'events.*.start' => 'required|date',
             'events.*.end' => 'sometimes|date',
             'events.*.attendanceTypeId' => 'required',
@@ -85,7 +85,7 @@ class CalendarController extends RestController
             $events_data = collect($request->input('events'))
                 ->map(function ($item) {
                     return [
-                        'name' => $item['name'],
+                        'title' => $item['title'],
                         'start' => $item['start'],
                         'end' => isset($item['end']) ? $item['end'] : null,
                         'attendance_type_id' => $item['attendanceTypeId'],
@@ -311,7 +311,7 @@ class CalendarController extends RestController
     public function addEvent(CalendarService $service, Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'title' => 'required',
             'start' => 'required|date',
             'end' => 'sometimes|date',
             'attendanceTypeId' => 'required',
@@ -319,7 +319,7 @@ class CalendarController extends RestController
 
         try {
             $calendar = $service->addEvent($id, [
-                'name' => $request->input('name'),
+                'title' => $request->input('title'),
                 'start' => $request->input('start'),
                 'end' => $request->input('end'),
                 'attendance_type_id' => $request->input('attendanceTypeId'),
@@ -377,7 +377,7 @@ class CalendarController extends RestController
     public function updateEvent(CalendarService $service, Request $request, $calendar_id, $event_id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'title' => 'required',
             'start' => 'required|date',
             'end' => 'sometimes|date',
             'attendanceTypeId' => 'required',
@@ -385,7 +385,7 @@ class CalendarController extends RestController
 
         try {
             $calendar = $service->updateEvent($calendar_id, $event_id, [
-                'name' => $request->input('name'),
+                'title' => $request->input('title'),
                 'start' => $request->input('start'),
                 'end' => $request->input('end'),
                 'attendance_type_id' => $request->input('attendanceTypeId'),

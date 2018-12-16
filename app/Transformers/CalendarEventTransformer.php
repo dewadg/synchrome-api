@@ -20,7 +20,7 @@ class CalendarEventTransformer extends TransformerAbstract
     {
         return [
             'id' => $event->id,
-            'name' => $event->name,
+            'title' => $event->title,
             'start' => $event->start->format('Y-m-d'),
             'end' => ! is_null($event->end) ? $event->end->format('Y-m-d') : null,
         ];

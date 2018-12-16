@@ -59,7 +59,7 @@ class CalendarService
         $events_data = collect($events)
             ->map(function ($item) {
                 return new CalendarEvent([
-                    'name' => $item['name'],
+                    'title' => $item['title'],
                     'start' => $item['start'],
                     'end' => ! isset($item['end']) ? null : $item['end'],
                     'attendance_type_id' => $item['attendance_type_id'],
@@ -141,7 +141,7 @@ class CalendarService
         $calendar = $this->repo->find($id);
 
         $calendar->events()->create([
-            'name' => $event['name'],
+            'title' => $event['title'],
             'start' => $event['start'],
             'end' => ! isset($event['end']) ? null : $event['end'],
             'attendance_type_id' => $event['attendance_type_id'],
@@ -171,7 +171,7 @@ class CalendarService
         }
 
         $event->update([
-            'name' => $data['name'],
+            'title' => $data['title'],
             'start' => $data['start'],
             'end' => ! isset($data['end']) ? null : $data['end'],
             'attendance_type_id' => $data['attendance_type_id'],

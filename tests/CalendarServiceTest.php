@@ -30,12 +30,12 @@ class RoleServiceTest extends TestCase
 
         $events = [
             [
-                'name' => 'Tahun Baru 2018',
+                'title' => 'Tahun Baru 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ],
             [
-                'name' => 'Natal 2018',
+                'title' => 'Natal 2018',
                 'start' => '2018-12-25',
                 'attendance_type_id' => 'L',
             ],
@@ -58,12 +58,12 @@ class RoleServiceTest extends TestCase
 
         $events = [
             [
-                'name' => 'Tahun Baru 2018',
+                'title' => 'Tahun Baru 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ],
             [
-                'name' => 'Natal 2018',
+                'title' => 'Natal 2018',
                 'start' => '2018-12-25',
                 'attendance_type_id' => 'L',
             ],
@@ -88,12 +88,12 @@ class RoleServiceTest extends TestCase
 
         $events = [
             [
-                'name' => 'Tahun Baru 2018',
+                'title' => 'Tahun Baru 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ],
             [
-                'name' => 'Natal 2018',
+                'title' => 'Natal 2018',
                 'start' => '2018-12-25',
                 'attendance_type_id' => 'L',
             ],
@@ -141,12 +141,12 @@ class RoleServiceTest extends TestCase
         $new_calendar = $this->service->create($data);
 
         $updated_calendar = $this->service->addEvent($new_calendar->id, [
-            'name' => 'Tahun Baru 2018',
+            'title' => 'Tahun Baru 2018',
             'start' => '2018-01-01',
             'attendance_type_id' => 'L',
         ]);
 
-        $this->assertTrue($updated_calendar->events->first()->name === 'Tahun Baru 2018');
+        $this->assertTrue($updated_calendar->events->first()->title === 'Tahun Baru 2018');
         $this->assertTrue($updated_calendar->events->first()->start->format('Y-m-d') === '2018-01-01');
         $this->assertTrue($updated_calendar->events->first()->attendance_type_id === 'L');
     }
@@ -162,7 +162,7 @@ class RoleServiceTest extends TestCase
 
         $events = [
             [
-                'name' => 'Tahun Baru 2018',
+                'title' => 'Tahun Baru 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ],
@@ -173,13 +173,13 @@ class RoleServiceTest extends TestCase
             $new_calendar->id,
             $new_calendar->events->first()->id,
             [
-                'name' => 'New Year 2018',
+                'title' => 'New Year 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ]
         );
 
-        $this->assertTrue($updated_calendar->events->first()->name === 'New Year 2018');
+        $this->assertTrue($updated_calendar->events->first()->title === 'New Year 2018');
     }
 
     public function testDeleteEvent()
@@ -193,7 +193,7 @@ class RoleServiceTest extends TestCase
 
         $events = [
             [
-                'name' => 'Tahun Baru 2018',
+                'title' => 'Tahun Baru 2018',
                 'start' => '2018-01-01',
                 'attendance_type_id' => 'L',
             ],
