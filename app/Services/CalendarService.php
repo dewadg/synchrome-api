@@ -53,6 +53,7 @@ class CalendarService
             'name' => $data['name'],
             'start' => $data['start'],
             'end' => $data['end'],
+            'published' => $data['published'],
         ]);
 
         $events_data = collect($events)
@@ -87,6 +88,7 @@ class CalendarService
             'name' => $data['name'],
             'start' => $data['start'],
             'end' => $data['end'],
+            'published' => $data['published'],
         ]);
 
         return $calendar;

@@ -79,6 +79,16 @@ class Calendar extends Model
         'name',
         'start',
         'end',
+        'published',
+    ];
+
+    /**
+     * Casted attributes.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'published' => 'boolean',
     ];
 
     /**

@@ -25,6 +25,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $events = [
@@ -52,6 +53,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $events = [
@@ -81,6 +83,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $events = [
@@ -107,12 +110,14 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2017-01-01',
             'end' => '2017-12-31',
+            'published' => true,
         ];
 
         $new_data = [
             'name' => 'Kalender Kerja 2018',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => false,
         ];
 
         $new_calendar = $this->service->create($data);
@@ -121,6 +126,7 @@ class RoleServiceTest extends TestCase
         $this->assertTrue($updated_calendar->name === $new_data['name']);
         $this->assertTrue($updated_calendar->start->format('Y-m-d') === $new_data['start']);
         $this->assertTrue($updated_calendar->end->format('Y-m-d') === $new_data['end']);
+        $this->assertTrue($updated_calendar->published === $new_data['published']);
     }
 
     public function testAddEvent()
@@ -129,6 +135,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $new_calendar = $this->service->create($data);
@@ -150,6 +157,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $events = [
@@ -180,6 +188,7 @@ class RoleServiceTest extends TestCase
             'name' => 'Kalender Kerja 2017',
             'start' => '2018-01-01',
             'end' => '2018-12-31',
+            'published' => true,
         ];
 
         $events = [
