@@ -23,6 +23,7 @@ class CalendarTransformer extends TransformerAbstract
             'name' => $calendar->name,
             'start' => $calendar->start->format('Y-m-d'),
             'end' => $calendar->end->format('Y-m-d'),
+            'published' => $calendar->published,
         ];
     }
 
