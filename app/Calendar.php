@@ -41,6 +41,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *                 type="string"
  *             ),
  *             @SWG\Property(
+ *                 property="published",
+ *                 type="number"
+ *             ),
+ *             @SWG\Property(
  *                 property="attendanceTypeId",
  *                 type="string"
  *             )
@@ -61,6 +65,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *     @SWG\Property(
  *         property="end",
  *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="published",
+ *         type="number"
  *     )
  * )
  */
