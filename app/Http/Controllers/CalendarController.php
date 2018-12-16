@@ -66,6 +66,7 @@ class CalendarController extends RestController
             'name' => 'required',
             'start' => 'required|date',
             'end' => 'required|date',
+            'published' => 'required|boolean',
             'events' => 'required|array',
             'events.*.name' => 'required',
             'events.*.start' => 'required|date',
@@ -78,6 +79,7 @@ class CalendarController extends RestController
                 'name' => $request->input('name'),
                 'start' => $request->input('start'),
                 'end' => $request->input('end'),
+                'published' => $request->input('published'),
             ];
 
             $events_data = collect($request->input('events'))
@@ -179,6 +181,7 @@ class CalendarController extends RestController
             'name' => 'required',
             'start' => 'required|date',
             'end' => 'required|date',
+            'published' => 'required|boolean',
         ]);
 
         try {
@@ -186,6 +189,7 @@ class CalendarController extends RestController
                 'name' => $request->input('name'),
                 'start' => $request->input('start'),
                 'end' => $request->input('end'),
+                'published' => $request->input('published'),
             ]);
 
             return $this->sendItem($calendar);
