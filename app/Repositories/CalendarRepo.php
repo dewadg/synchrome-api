@@ -14,6 +14,7 @@ class CalendarRepo implements RepositoryInterface
                 'name',
                 'start',
                 'end',
+                'published',
             ]);
     }
 
