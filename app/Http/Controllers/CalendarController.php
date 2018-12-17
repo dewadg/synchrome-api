@@ -70,7 +70,7 @@ class CalendarController extends RestController
             'events' => 'required|array',
             'events.*.title' => 'required',
             'events.*.start' => 'required|date',
-            'events.*.end' => 'sometimes|date',
+            'events.*.end' => 'present',
             'events.*.attendanceTypeId' => 'required',
         ]);
 
@@ -313,7 +313,7 @@ class CalendarController extends RestController
         $this->validate($request, [
             'title' => 'required',
             'start' => 'required|date',
-            'end' => 'sometimes|date',
+            'end' => 'present',
             'attendanceTypeId' => 'required',
         ]);
 
@@ -379,7 +379,7 @@ class CalendarController extends RestController
         $this->validate($request, [
             'title' => 'required',
             'start' => 'required|date',
-            'end' => 'sometimes|date',
+            'end' => 'present',
             'attendanceTypeId' => 'required',
         ]);
 
