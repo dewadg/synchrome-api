@@ -118,3 +118,25 @@ $router->delete('calendars/{calendar_id}/events/{event_id}', [
     'uses' => 'CalendarController@deleteEvent',
     'middleware' => ['auth'],
 ]);
+
+// Workshifts
+$router->get('workshifts', [
+    'uses' => 'WorkshiftController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('workshifts', [
+    'uses' => 'WorkshiftController@store',
+    'middleware' => ['auth'],
+]);
+$router->get('workshifts/{id}', [
+    'uses' => 'WorkshiftController@find',
+    'middleware' => ['auth'],
+]);
+$router->patch('workshifts/{id}', [
+    'uses' => 'WorkshiftController@update',
+    'middleware' => ['auth'],
+]);
+$router->delete('workshifts/{id}', [
+    'uses' => 'WorkshiftController@destroy',
+    'middleware' => ['auth'],
+]);
