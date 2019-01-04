@@ -609,6 +609,137 @@
                     }
                 ]
             }
+        },
+        "/workshifts": {
+            "get": {
+                "tags": [
+                    "Workshifts"
+                ],
+                "summary": "Fetch list of workshifts.",
+                "operationId": "workshiftsIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of workshifts."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Workshifts"
+                ],
+                "summary": "Create a new rank.",
+                "operationId": "ranksStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateWorkshiftRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/workshifts/{id}": {
+            "get": {
+                "tags": [
+                    "Workshifts"
+                ],
+                "summary": "Fetch workshift by ID.",
+                "operationId": "workshiftsShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A workshift."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Workshifts"
+                ],
+                "summary": "Update a workshift.",
+                "operationId": "workshiftsUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Workshifts"
+                ],
+                "summary": "Update a workshift.",
+                "operationId": "workshiftsUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateWorkshiftRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {
@@ -776,6 +907,70 @@
                 "password": {
                     "description": "Class User",
                     "type": "string"
+                }
+            }
+        },
+        "CreateWorkshiftRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Workshift",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "Class Workshift",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "index": {
+                                "description": "Class Workshift",
+                                "type": "integer"
+                            },
+                            "check_in": {
+                                "description": "Class Workshift",
+                                "type": "string"
+                            },
+                            "check_out": {
+                                "description": "Class Workshift",
+                                "type": "string"
+                            },
+                            "active": {
+                                "description": "Class Workshift",
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "UpdateWorkshiftRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Workshift",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "Class Workshift",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "index": {
+                                "description": "Class Workshift",
+                                "type": "integer"
+                            },
+                            "check_in": {
+                                "description": "Class Workshift",
+                                "type": "string"
+                            },
+                            "check_out": {
+                                "description": "Class Workshift",
+                                "type": "string"
+                            },
+                            "active": {
+                                "description": "Class Workshift",
+                                "type": "boolean"
+                            }
+                        }
+                    }
                 }
             }
         }

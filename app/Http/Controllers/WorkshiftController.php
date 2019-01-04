@@ -13,11 +13,50 @@ class WorkshiftController extends RestController
 {
     protected $transformer_name = WorkshiftTransformer::class;
 
+    /**
+     * @SWG\Get(
+     *     path="/workshifts",
+     *     tags={"Workshifts"},
+     *     operationId="workshiftsIndex",
+     *     summary="Fetch list of workshifts.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="List of workshifts."
+     *     )
+     * )
+     *
+     * @param WorkshiftService $service
+     * @return Illuminate\Http\JsonResponse
+     */
     public function index(WorkshiftService $service)
     {
         return $this->sendCollection($service->get());
     }
 
+    /**
+     * @SWG\Post(
+     *     path="/workshifts",
+     *     tags={"Workshifts"},
+     *     operationId="ranksStore",
+     *     summary="Create a new rank.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CreateWorkshiftRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     )
+     * )
+     *
+     * @param WorkshiftService $service
+     * @param Request $request
+     * @return Illuminate\Http\JsonResponse
+     */
     public function store(WorkshiftService $service, Request $request)
     {
         $this->validate($request, [
@@ -43,6 +82,29 @@ class WorkshiftController extends RestController
         }
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/workshifts/{id}",
+     *     tags={"Workshifts"},
+     *     operationId="workshiftsShow",
+     *     summary="Fetch workshift by ID.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="A workshift."
+     *     )
+     * )
+     *
+     * @param WorkshiftService $service
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
     public function find(WorkshiftService $service, $id)
     {
         try {
@@ -56,6 +118,36 @@ class WorkshiftController extends RestController
         }
     }
 
+    /**
+     * @SWG\Patch(
+     *     path="/workshifts/{id}",
+     *     tags={"Workshifts"},
+     *     operationId="workshiftsUpdate",
+     *     summary="Update a workshift.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateWorkshiftRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     )
+     * )
+     *
+     * @param WorkshiftService $service
+     * @param Request $request
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
     public function update(WorkshiftService $service, Request $request, $id)
     {
         $this->validate($request, [
@@ -83,6 +175,29 @@ class WorkshiftController extends RestController
         }
     }
 
+    /**
+     * @SWG\Delete(
+     *     path="/workshifts/{id}",
+     *     tags={"Workshifts"},
+     *     operationId="workshiftsUpdate",
+     *     summary="Update a workshift.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted."
+     *     )
+     * )
+     *
+     * @param WorkshiftService $service
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
     public function destroy(WorkshiftService $service, $id)
     {
         try {
