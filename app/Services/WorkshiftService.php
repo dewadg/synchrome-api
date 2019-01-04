@@ -95,6 +95,7 @@ class WorkshiftService
 
         $workshift->details->each->delete();
         $workshift->details()->saveMany($details);
+        $workshift->load('details');
 
         return $workshift;
     }
