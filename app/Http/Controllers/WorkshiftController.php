@@ -63,8 +63,8 @@ class WorkshiftController extends RestController
             'name' => 'required',
             'details' => 'required|array',
             'details.*.index' => 'required|in:1,2,3,4,5,6,7',
-            'details.*.check_in' => 'present',
-            'details.*.check_out' => 'present',
+            'details.*.checkIn' => 'present',
+            'details.*.checkOut' => 'present',
             'details.*.active' => 'present',
         ]);
 
@@ -72,7 +72,14 @@ class WorkshiftController extends RestController
             DB::transaction(function () use ($service, $request, &$workshift) {
                 $workshift = $service->create([
                     'name' => $request->input('name'),
-                    'details' => $request->input('details'),
+                    'details' => collect($request->input('details'))->map(function ($item) {
+                        return [
+                            'index' => $item['index'],
+                            'check_in' => $item['checkIn'],
+                            'check_out' => $item['checkOut'],
+                            'active' => $item['active'],
+                        ];
+                    }),
                 ]);
             });
 
@@ -154,8 +161,8 @@ class WorkshiftController extends RestController
             'name' => 'required',
             'details' => 'required|array',
             'details.*.index' => 'required|in:1,2,3,4,5,6,7',
-            'details.*.check_in' => 'present',
-            'details.*.check_out' => 'present',
+            'details.*.checkIn' => 'present',
+            'details.*.checkOut' => 'present',
             'details.*.active' => 'present',
         ]);
 
@@ -163,7 +170,14 @@ class WorkshiftController extends RestController
             DB::transaction(function () use ($service, $request, $id, &$workshift) {
                 $workshift = $service->update($id, [
                     'name' => $request->input('name'),
-                    'details' => $request->input('details'),
+                    'details' => collect($request->input('details'))->map(function ($item) {
+                        return [
+                            'index' => $item['index'],
+                            'check_in' => $item['checkIn'],
+                            'check_out' => $item['checkOut'],
+                            'active' => $item['active'],
+                        ];
+                    }),
                 ]);
             });
 

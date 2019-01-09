@@ -18,8 +18,8 @@ class WorkshiftDetailTransformer extends TransformerAbstract
     {
         return [
             'index' => $detail->index,
-            'check_in' => $detail->check_in,
-            'check_out' => $detail->check_out,
+            'checkIn' => $detail->check_in,
+            'checkOut' => $detail->check_out,
             'active' => $detail->active,
         ];
     }

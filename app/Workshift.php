@@ -25,11 +25,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *                  type="integer"
  *              ),
  *              @SWG\Property(
- *                  property="check_in",
+ *                  property="checkIn",
  *                  type="string"
  *              ),
  *              @SWG\Property(
- *                  property="check_out",
+ *                  property="checkOut",
  *                  type="string"
  *              ),
  *              @SWG\Property(
@@ -55,11 +55,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *                  type="integer"
  *              ),
  *              @SWG\Property(
- *                  property="check_in",
+ *                  property="checkOn",
  *                  type="string"
  *              ),
  *              @SWG\Property(
- *                  property="check_out",
+ *                  property="checkOut",
  *                  type="string"
  *              ),
  *              @SWG\Property(
