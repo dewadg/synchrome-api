@@ -2,4 +2,6 @@
 /storage/api-docs
 /storage/app
 /storage/logs/lumen.log
+/storage/framework/cache
+/storage/framework/views
 .env

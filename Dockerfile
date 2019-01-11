@@ -1,20 +1,16 @@
-FROM linuxserver/letsencrypt
+FROM composer AS build
 
-# Install Composer
-RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
-RUN mv composer.phar /usr/local/bin/composer
+WORKDIR /build
 
-# Copy the required files
-ADD . /home/synchrome/lumen
-ADD ./deploy/nginx/config/nginx.conf /config/nginx/site-confs/default
+COPY ./composer.json ./composer.json
+COPY ./composer.lock ./composer.lock
+COPY ./tests ./tests
+COPY ./database ./database
 
-WORKDIR /home/synchrome/lumen
-
-# Install dependencies
 RUN composer install
 RUN composer dump-autoload
 
-RUN chgrp -R 1002 /home/synchrome/lumen .
-RUN chmod -R ug+rwx storage
+FROM dewadg/lumen:latest
 
-RUN cp .env.production .env
+ADD . /var/www/lumen
+COPY --from=build /build/vendor /var/www/lumen/vendor
