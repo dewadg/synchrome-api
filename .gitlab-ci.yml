@@ -10,7 +10,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
 
 run_composer_install:
-  stage: build
+  stage: preparation
   image: composer
   before_script:
     - composer -v
