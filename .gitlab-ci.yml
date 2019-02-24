@@ -106,7 +106,7 @@ deploy:
           -e CACHE_DRIVER=$CACHE_DRIVER \
           -e QUEUE_DRIVER=$QUEUE_DRIVER \
           -e ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE \
-          --network synchrome_net
+          --network synchrome_net \
           $IMAGE_REGISTRY;
         docker start $CONTAINER_NAME;
       "
