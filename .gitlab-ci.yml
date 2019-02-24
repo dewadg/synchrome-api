@@ -71,7 +71,7 @@ deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - touch known_hosts
-    - ssh-keygen -R $PROD_SERVER_ADDRESS known_hosts
+    - ssh-keygen -R $PROD_SERVER_ADDRESS -f known_hosts
   script:
     - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
     - docker pull $IMAGE_REGISTRY:latest
