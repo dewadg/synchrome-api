@@ -72,4 +72,9 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -H $PROD_SERVER_ADDRESS >> ~/.ssh/known_hosts
   script:
-    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "docker pull $IMAGE_REGISTRY:latest; docker create --name $CONTAINER_NAME -p 8000:80; docker start $CONTAINER_NAME"
+    - |
+      ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
+        docker pull $IMAGE_REGISTRY:latest;
+        docker create --name $CONTAINER_NAME -p 8000:80 $IMAGE_REGISTRY;
+        docker start $CONTAINER_NAME
+      "
