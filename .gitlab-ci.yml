@@ -72,5 +72,4 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -H $PROD_SERVER_ADDRESS >> ~/.ssh/known_hosts
   script:
-    - echo "Pulling image $IMAGE_REGISTRY"
-    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS 'docker pull $IMAGE_REGISTRY:latest'
+    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "docker pull $IMAGE_REGISTRY:latest"
