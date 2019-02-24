@@ -9,6 +9,9 @@ cache:
   paths:
     - vendor/
 
+before_script:
+  - 'docker-php-ext-install pdo pdo_mysql mbstring tokenizer xml gd zip'
+
 build_run_composer_install:
   stage: build
   image: composer
@@ -49,5 +52,4 @@ test_run_migration:
 test_run_unit_tests:
   stage: test
   script:
-    - 'docker-php-ext-install mbstring tokenizer mysqli xml gd zip'
     - 'vendor/bin/phpunit'
