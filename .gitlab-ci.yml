@@ -8,6 +8,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - vendor/
+    - .env
 
 before_script:
   - 'docker-php-ext-install pdo pdo_mysql'
@@ -47,9 +48,11 @@ test_setup_env:
 test_run_migration:
   stage: test
   script:
+    - 'cat .env'
     - 'php artisan migrate:fresh --seed'
 
 test_run_unit_tests:
   stage: test
   script:
+    - 'cat .env'
     - 'vendor/bin/phpunit'
