@@ -67,13 +67,12 @@ deploy:
   before_script:
     - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
     - eval $(ssh-agent -s)
+    - echo "$PROD_SERVER_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - touch access_key
-    - echo "$PROD_SERVER_SSH_PRIVATE_KEY" >> access_key
-    - chmod 644 access_key
+    - ssh-keygen -R $PROD_SERVER_ADDRESS
   script:
-    - ssh -i ~/.ssh/access_key $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
+    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
     - docker pull $IMAGE_REGISTRY:latest
     - '[ ! "$(docker ps -a | grep $CONTAINER_NAME)" ] && docker rm -f $CONTAINER_NAME'
     - docker create --name $CONTAINER_NAME -p 8000:80 $IMAGE_REGISTRY
