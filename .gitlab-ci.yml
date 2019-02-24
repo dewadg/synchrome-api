@@ -16,6 +16,6 @@ build_run_composer_install:
 
 test_setup_env:
   stage: test
-  before_script:
+  script:
     - echo "Printing all variables:"
     - echo $APP_ENV
