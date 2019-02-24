@@ -86,11 +86,12 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -H $PROD_SERVER_ADDRESS >> ~/.ssh/known_hosts
   script:
-    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         docker pull $IMAGE_REGISTRY:latest;
+        sleep 2;
         [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ] && docker rm -f $CONTAINER_NAME;
+        sleep 2;
         docker create \
           --name $CONTAINER_NAME \
           -p 8000:80 \
