@@ -5,6 +5,7 @@ stages:
 
 variables:
   IMAGE_REGISTRY: registry.gitlab.com/dewadg/synchrome-api
+  CONTAINER_NAME: synchrome-api
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -58,3 +59,19 @@ generate_image:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
     - docker build -t $IMAGE_REGISTRY:latest .
     - docker push $IMAGE_REGISTRY:latest
+
+deploy:
+  stage: deploy
+  image: ubuntu
+  before_script:
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+    - eval $(ssh-agent -s)
+    - echo "$PROD_SERVER_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
+    - docker pull $IMAGE_REGISTRY:latest
+    - docker rm -f $CONTAINER_NAME
+    - docker create --name $CONTAINER_NAME -p 8000:80 $IMAGE_REGISTRY
+    - docker run $CONTAINER_NAME
