@@ -70,6 +70,7 @@ deploy:
     - echo "$PROD_SERVER_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - touch known_hosts
     - ssh-keygen -R $PROD_SERVER_ADDRESS
   script:
     - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
