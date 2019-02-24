@@ -33,7 +33,7 @@ test_setup_env:
     - 'echo "APP_KEY=$APP_KEY" >> .env'
     - 'echo "APP_TIMEZONE=$APP_TIMEZONE" >> .env'
     - 'echo "DB_CONNECTION=$DB_CONNECTION" >> .env'
-    - 'echo "DB_HOST=$DB_HOST" >> .env'
+    - 'echo "DB_HOST=$TEST_DB_HOST" >> .env'
     - 'echo "DB_PORT=$DB_PORT" >> .env'
     - 'echo "DB_DATABASE=$DB_DATABASE" >> .env'
     - 'echo "DB_USERNAME=$DB_USERNAME" >> .env'
