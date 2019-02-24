@@ -47,6 +47,11 @@ run_unit_tests:
 generate_image:
   stage: deploy
   image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
   before_script:
     - docker version
   script:
