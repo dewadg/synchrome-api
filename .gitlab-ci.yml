@@ -8,14 +8,32 @@ build_run_composer_install:
   stage: build
   image: composer
   before_script:
-    - composer -v
+    - 'composer -v'
   script:
-    - composer install
+    - 'composer install'
   after_script:
-    - composer dump-autoload
+    - 'composer dump-autoload'
 
 test_setup_env:
   stage: test
+  before_script:
+    - 'echo "Setting up environment variables"'
+    - '[ -e .env ] && rm .env'
+    - 'touch .env'
+    - 'echo "APP_ENV=$APP_ENV" >> .env'
+    - 'echo "APP_DEBUG=$APP_DEBUG" >> .env'
+    - 'echo "APP_KEY=$APP_KEY" >> .env'
+    - 'echo "APP_TIMEZONE=$APP_TIMEZONE" >> .env'
+    - 'echo "DB_CONNECTION=$DB_CONNECTION" >> .env'
+    - 'echo "DB_HOST=$DB_HOST" >> .env'
+    - 'echo "DB_PORT=$DB_PORT" >> .env'
+    - 'echo "DB_DATABASE=$DB_DATABASE" >> .env'
+    - 'echo "DB_USERNAME=$DB_USERNAME" >> .env'
+    - 'echo "DB_PASSWORD=$DB_PASSWORD" >> .env'
+    - 'echo "LOG_CHANNEL=$LOG_CHANNEL" >> .env'
+    - 'echo "CACHE_DRIVER=$CACHE_DRIVER" >> .env'
+    - 'echo "QUEUE_DRIVER=$QUEUE_DRIVER" >> .env'
+    - 'echo "ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE" >> .env'
+    - 'cat .env'
   script:
-    - echo "Printing all variables:"
-    - echo $APP_ENV
+    - 'It works'
