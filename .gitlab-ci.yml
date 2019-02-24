@@ -1,6 +1,7 @@
 stages:
   - preparation
   - test
+  - build
   - deploy
 
 variables:
@@ -46,7 +47,7 @@ run_unit_tests:
     - vendor/bin/phpunit
 
 generate_image:
-  stage: deploy
+  stage: build
   image: docker:stable
   services:
     - docker:dind
