@@ -89,7 +89,7 @@ deploy:
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         docker pull $IMAGE_REGISTRY:latest;
-        [ ! '$(docker ps -a | grep $CONTAINER_NAME)' ] && docker rm -f $CONTAINER_NAME;
+        [ '$(docker ps -a | grep $CONTAINER_NAME)' ] && docker rm -f $CONTAINER_NAME;
         docker create \
           --name $CONTAINER_NAME \
           -p 8000:80 \
@@ -106,6 +106,7 @@ deploy:
           -e CACHE_DRIVER=$CACHE_DRIVER \
           -e QUEUE_DRIVER=$QUEUE_DRIVER \
           -e ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE \
+          --network synchrome_net
           $IMAGE_REGISTRY;
         docker start $CONTAINER_NAME;
       "
