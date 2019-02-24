@@ -46,7 +46,7 @@ run_unit_tests:
 
 generate_image:
   stage: deploy
-  image: docker
+  image: docker:stable
   before_script:
     - docker version
   script:
