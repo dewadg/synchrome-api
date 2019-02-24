@@ -72,8 +72,4 @@ deploy:
     - chmod 700 ~/.ssh
     - ssh-keyscan -H $PROD_SERVER_ADDRESS >> ~/.ssh/known_hosts
   script:
-    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
-    - docker pull $IMAGE_REGISTRY:latest
-    - '[ ! "$(docker ps -a | grep $CONTAINER_NAME)" ] && docker rm -f $CONTAINER_NAME'
-    - docker create --name $CONTAINER_NAME -p 8000:80 $IMAGE_REGISTRY
-    - docker run $CONTAINER_NAME
+    - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS 'docker version && docker pull $IMAGE_REGISTRY:latest'
