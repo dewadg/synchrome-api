@@ -72,6 +72,7 @@ deploy:
     - chmod 700 ~/.ssh
     - touch known_hosts
     - echo "$PROD_SERVER_KNOWN_HOSTS" >> known_hosts
+    - chmod 644 known_hosts
   script:
     - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
     - docker pull $IMAGE_REGISTRY:latest
