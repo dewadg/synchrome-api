@@ -89,9 +89,12 @@ deploy:
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         docker pull $IMAGE_REGISTRY:latest;
-        sleep 2;
-        [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ] && docker rm -f $CONTAINER_NAME;
-        sleep 2;
+        if [ "$(docker ps -aqf name=$CONTAINER_NAME)" ]; then \
+          echo 'Removing existing $CONTAINER_NAME container';
+          docker rm -f $CONTAINER_NAME;
+        else \
+          echo 'No $CONTAINER_NAME container exists';
+        fi;
         docker create \
           --name $CONTAINER_NAME \
           -p 8000:80 \
