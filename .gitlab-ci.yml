@@ -76,5 +76,5 @@ deploy:
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         docker pull $IMAGE_REGISTRY:latest;
         docker create --name $CONTAINER_NAME -p 8000:80 $IMAGE_REGISTRY;
-        docker start $CONTAINER_NAME
+        docker start $CONTAINER_NAME;
       "
