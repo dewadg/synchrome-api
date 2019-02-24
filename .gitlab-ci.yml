@@ -89,22 +89,22 @@ deploy:
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         docker pull $IMAGE_REGISTRY:latest;
-        docker create
-          --name $CONTAINER_NAME
-          -p 8000:80
-          -e APP_ENV=$APP_ENV
-          -e APP_DEBUG=$APP_DEBUG
-          -e APP_KEY=$APP_KEY
-          -e APP_TIMEZONE=$APP_TIMEZONE
-          -e DB_CONNECTION=$DB_CONNECTION
-          -e DB_HOST=$DB_HOST
-          -e DB_DATABASE=$DB_DATABASE
-          -e DB_USERNAME=$DB_USERNAME
-          -e DB_PASSWORD=$DB_PASSWORD
-          -e LOG_CHANNEL=$LOG_CHANNEL
-          -e CACHE_DRIVER=$CACHE_DRIVER
-          -e QUEUE_DRIVER=$QUEUE_DRIVER
-          -e ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE
+        docker create \
+          --name $CONTAINER_NAME \
+          -p 8000:80 \
+          -e APP_ENV=$APP_ENV \
+          -e APP_DEBUG=$APP_DEBUG \
+          -e APP_KEY=$APP_KEY \
+          -e APP_TIMEZONE=$APP_TIMEZONE \
+          -e DB_CONNECTION=$DB_CONNECTION \
+          -e DB_HOST=$DB_HOST \
+          -e DB_DATABASE=$DB_DATABASE \
+          -e DB_USERNAME=$DB_USERNAME \
+          -e DB_PASSWORD=$DB_PASSWORD \
+          -e LOG_CHANNEL=$LOG_CHANNEL \
+          -e CACHE_DRIVER=$CACHE_DRIVER \
+          -e QUEUE_DRIVER=$QUEUE_DRIVER \
+          -e ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE \
           $IMAGE_REGISTRY;
         docker start $CONTAINER_NAME;
       "
