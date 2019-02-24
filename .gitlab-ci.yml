@@ -49,4 +49,5 @@ test_run_migration:
 test_run_unit_tests:
   stage: test
   script:
+    - 'docker-php-ext-install mbstring tokenizer mysqli xml gd zip'
     - 'vendor/bin/phpunit'
