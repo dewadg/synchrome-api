@@ -70,6 +70,8 @@ deploy:
     - echo "$PROD_SERVER_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - touch known_hosts
+    - echo "$PROD_SERVER_KNOWN_HOSTS" >> known_hosts
   script:
     - ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS
     - docker pull $IMAGE_REGISTRY:latest
