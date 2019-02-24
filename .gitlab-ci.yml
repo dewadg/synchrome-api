@@ -1,3 +1,5 @@
+image: php:7.2-alpine
+
 stages:
   - build
   - test
@@ -12,10 +14,8 @@ build_run_composer_install:
   after_script:
     - composer dump-autoload
 
-test_run_unit_tests:
+test_setup_env:
   stage: test
-  image: php7.2
   before_script:
-    - php -v
-  script:
-    - vendor/bin/phpunit
+    - echo "Printing all variables:"
+    - echo $APP_ENV
