@@ -1,0 +1,18 @@
+image: php:7.2
+
+stages:
+  - build
+
+before_script:
+  - apt update
+  - apt upgrade -y
+  - apt install composer -y
+
+build_run_composer_install:
+  stage: build
+  before_script:
+    - composer -v
+  script:
+    - composer install
+  after_script:
+    - composer dump-autoload
