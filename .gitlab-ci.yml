@@ -6,7 +6,7 @@ stages:
 
 variables:
   IMAGE_REGISTRY: registry.gitlab.com/dewadg/synchrome-api
-  CONTAINER_NAME: synchrome-api
+  CONTAINER_NAME: "synchrome-api"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
