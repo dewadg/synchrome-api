@@ -85,8 +85,6 @@ deploy:
         echo CACHE_DRIVER=$PROD_CACHE_DRIVER >> .env;
         echo QUEUE_DRIVER=$PROD_QUEUE_DRIVER >> .env;
         echo ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE >> .env;
-        cat .env;
-        docker-compose -v;
         docker-compose up --build -d;
         exit;
       "
