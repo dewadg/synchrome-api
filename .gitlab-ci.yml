@@ -88,30 +88,25 @@ deploy:
   script:
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
-        docker pull $IMAGE_REGISTRY:latest;
-        if [ "$(docker ps -aqf name=$CONTAINER_NAME | grep -q .)" ]; then \
-          echo 'Removing existing $CONTAINER_NAME container';
-          docker rm -f $CONTAINER_NAME;
-        else \
-          echo 'No $CONTAINER_NAME container exists';
-        fi;
-        docker create \
-          --name $CONTAINER_NAME \
-          -p 8000:80 \
-          -e APP_ENV=$APP_ENV \
-          -e APP_DEBUG=$APP_DEBUG \
-          -e APP_KEY=$APP_KEY \
-          -e APP_TIMEZONE=$APP_TIMEZONE \
-          -e DB_CONNECTION=$DB_CONNECTION \
-          -e DB_HOST=$DB_HOST \
-          -e DB_DATABASE=$DB_DATABASE \
-          -e DB_USERNAME=$DB_USERNAME \
-          -e DB_PASSWORD=$DB_PASSWORD \
-          -e LOG_CHANNEL=$LOG_CHANNEL \
-          -e CACHE_DRIVER=$CACHE_DRIVER \
-          -e QUEUE_DRIVER=$QUEUE_DRIVER \
-          -e ACCESS_TOKEN_AGE=$ACCESS_TOKEN_AGE \
-          --network synchrome_net \
-          $IMAGE_REGISTRY;
-        docker start $CONTAINER_NAME;
+        rm -Rf ~/service/synchrome-api;
+        mkdir -p ~/service/synchrome-api && cd ~/service/synchrome-api;
+        git clone http://$CI_DEPLOY_USER:$CI_DEPLOY_TOKEN@gitlab.com/dewadg/synchrome-api.git';
+        touch .env;
+        echo APP_ENV=$APP_ENV >> .env;
+        echo APP_DEBUG=$PROD_APP_DEBUG >> .env;
+        echo APP_KEY=$PROD_APP_KEY >> .env;
+        echo APP_TIMEZONE=$PROD_APP_TIMEZONE >> .env;
+        echo DB_CONNECTION=$PROD_DB_CONNECTION >> .env;
+        echo DB_HOST=$PROD_DB_HOST >> .env;
+        echo DB_DATABASE=$PROD_DB_DATABASE >> .env;
+        echo DB_USERNAME=$PROD_DB_USERNAME >> .env;
+        echo DB_PASSWORD=$PROD_DB_PASSWORD >> .env;
+        echo LOG_CHANNEL=$PROD_LOG_CHANNEL >> .env;
+        echo CACHE_DRIVER=$PROD_CACHE_DRIVER >> .env;
+        echo QUEUE_DRIVER=$PROD_QUEUE_DRIVER >> .env;
+        echo ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE >> .env;
+        cat .env;
+        docker-compose -v;
+        docker-compose up --build -d;
+        exit;
       "
