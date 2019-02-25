@@ -87,7 +87,7 @@ deploy:
         echo ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE >> .env;
         cat .env;
         docker-compose -v;
-        docker-network ls;
+        docker network ls;
         docker-compose up --build -d;
         exit;
       "
