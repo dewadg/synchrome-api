@@ -90,7 +90,7 @@ deploy:
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
         rm -Rf ~/service/synchrome-api;
         mkdir -p ~/service/synchrome-api && cd ~/service/synchrome-api;
-        git clone http://$CI_DEPLOY_USER:$CI_DEPLOY_TOKEN@gitlab.com/dewadg/synchrome-api.git';
+        git clone http://$CI_DEPLOY_USER:$CI_DEPLOY_TOKEN@gitlab.com/dewadg/synchrome-api.git .;
         touch .env;
         echo APP_ENV=$APP_ENV >> .env;
         echo APP_DEBUG=$PROD_APP_DEBUG >> .env;
