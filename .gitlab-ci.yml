@@ -1,12 +1,7 @@
 stages:
   - preparation
   - test
-  - build
   - deploy
-
-variables:
-  IMAGE_REGISTRY: registry.gitlab.com/dewadg/synchrome-api
-  CONTAINER_NAME: "synchrome-api"
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -45,21 +40,6 @@ run_unit_tests:
   script:
     - php artisan migrate:fresh --seed
     - vendor/bin/phpunit
-
-generate_image:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-  before_script:
-    - docker version
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-    - docker build -t $IMAGE_REGISTRY:latest .
-    - docker push $IMAGE_REGISTRY:latest
 
 deploy:
   stage: deploy
@@ -107,6 +87,7 @@ deploy:
         echo ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE >> .env;
         cat .env;
         docker-compose -v;
+        docker-network ls;
         docker-compose up --build -d;
         exit;
       "
