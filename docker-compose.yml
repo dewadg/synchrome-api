@@ -8,5 +8,8 @@ services:
       - 8000:80
     env_file:
       - .env
-    networks:
-      - synchrome_net
+
+networks:
+  default:
+    external:
+      name: synchrome_net
