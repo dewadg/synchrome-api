@@ -72,7 +72,7 @@ deploy:
         docker rm -f $CONTAINER_NAME 2> /dev/null;
         docker pull $CONTAINER_REGISTRY:latest;
         docker create --name $CONTAINER_NAME \
-          --network synchrome-net \
+          --network synchrome_net \
           -p 8000:80 \
           -e APP_ENV=$PROD_APP_ENV \
           -e APP_DEBUG=$PROD_APP_DEBUG \
