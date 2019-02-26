@@ -1,7 +1,12 @@
 stages:
   - preparation
   - test
+  - build
   - deploy
+
+variables:
+  CONTAINER_REGISTRY: registry.gitlab.com/dewadg/synchrome-api
+  CONTAINER_NAME: synchrome-api
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -11,12 +16,8 @@ cache:
 run_composer_install:
   stage: preparation
   image: composer
-  before_script:
-    - composer -v
   script:
     - composer install
-  after_script:
-    - composer dump-autoload
 
 run_unit_tests:
   stage: test
@@ -41,23 +42,23 @@ run_unit_tests:
     - php artisan migrate:fresh --seed
     - vendor/bin/phpunit
 
+build:
+  stage: build
+  image: docker
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:dind
+  script:
+    - docker build . -t $CONTAINER_REGISTRY:latest
+  after_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker push $CONTAINER_REGISTRY:latest
+
 deploy:
   stage: deploy
   image: ubuntu
-  variables:
-    APP_ENV: $PROD_APP_ENV
-    APP_DEBUG: $PROD_APP_DEBUG
-    APP_KEY: $PROD_APP_KEY
-    APP_TIMEZONE: $PROD_APP_TIMEZONE
-    DB_CONNECTION: $PROD_DB_CONNECTION
-    DB_HOST: $PROD_DB_HOST
-    DB_DATABASE: $PROD_DB_DATABASE
-    DB_USERNAME: $PROD_DB_USERNAME
-    DB_PASSWORD: $PROD_DB_PASSWORD
-    LOG_CHANNEL: $PROD_LOG_CHANNEL
-    CACHE_DRIVER: $PROD_CACHE_DRIVER
-    QUEUE_DRIVER: $PROD_QUEUE_DRIVER
-    ACCESS_TOKEN_AGE: $PROD_ACCESS_TOKEN_AGE
   before_script:
     - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
     - eval $(ssh-agent -s)
@@ -68,23 +69,25 @@ deploy:
   script:
     - |
       ssh $PROD_SERVER_USER@$PROD_SERVER_ADDRESS "
-        rm -Rf ~/service/synchrome-api;
-        mkdir -p ~/service/synchrome-api && cd ~/service/synchrome-api;
-        git clone http://$CI_DEPLOY_USER:$CI_DEPLOY_TOKEN@gitlab.com/dewadg/synchrome-api.git .;
-        touch .env;
-        echo APP_ENV=$APP_ENV >> .env;
-        echo APP_DEBUG=$PROD_APP_DEBUG >> .env;
-        echo APP_KEY=$PROD_APP_KEY >> .env;
-        echo APP_TIMEZONE=$PROD_APP_TIMEZONE >> .env;
-        echo DB_CONNECTION=$PROD_DB_CONNECTION >> .env;
-        echo DB_HOST=$PROD_DB_HOST >> .env;
-        echo DB_DATABASE=$PROD_DB_DATABASE >> .env;
-        echo DB_USERNAME=$PROD_DB_USERNAME >> .env;
-        echo DB_PASSWORD=$PROD_DB_PASSWORD >> .env;
-        echo LOG_CHANNEL=$PROD_LOG_CHANNEL >> .env;
-        echo CACHE_DRIVER=$PROD_CACHE_DRIVER >> .env;
-        echo QUEUE_DRIVER=$PROD_QUEUE_DRIVER >> .env;
-        echo ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE >> .env;
-        docker-compose up --build -d;
+        docker rm -f $CONTAINER_NAME 2> /dev/null;
+        docker pull $CONTAINER_REGISTRY:latest;
+        docker create --name $CONTAINER_NAME \
+          --network synchrome-net \
+          -p 8000:80 \
+          -e APP_ENV=$PROD_APP_ENV \
+          -e APP_DEBUG=$PROD_APP_DEBUG \
+          -e APP_KEY=$PROD_APP_KEY \
+          -e APP_TIMEZONE=$PROD_APP_TIMEZONE \
+          -e DB_CONNECTION=$PROD_DB_CONNECTION \
+          -e DB_HOST=$PROD_DB_HOST \
+          -e DB_DATABASE=$PROD_DB_DATABASE \
+          -e DB_USERNAME=$PROD_DB_USERNAME \
+          -e DB_PASSWORD=$PROD_DB_PASSWORD \
+          -e LOG_CHANNEL=$PROD_LOG_CHANNEL \
+          -e CACHE_DRIVER=$PROD_CACHE_DRIVER \
+          -e QUEUE_DRIVER=$PROD_QUEUE_DRIVER \
+          -e ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE \
+          $CONTAINER_REGISTRY;
+        docker start $CONTAINER_NAME;
         exit;
       "
