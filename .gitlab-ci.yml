@@ -13,13 +13,13 @@ cache:
   paths:
     - vendor/
 
-run_composer_install:
+composer_install:
   stage: preparation
   image: composer
   script:
     - composer install
 
-run_unit_tests:
+unit_test:
   stage: test
   image: php:7.2-alpine
   variables:
