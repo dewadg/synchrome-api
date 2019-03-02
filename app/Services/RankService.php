@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\RankRepo;
+use App\Repositories\RepositoryInterface;
 use App\Rank;
 
 class RankService
@@ -15,9 +15,9 @@ class RankService
     /**
      * RankService constructor.
      */
-    public function __construct()
+    public function __construct(RepositoryInterface $repo)
     {
-        $this->repo = new RankRepo;
+        $this->repo = $repo;
     }
 
     /**
