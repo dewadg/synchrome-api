@@ -169,10 +169,8 @@ class WorkshiftController extends RestController
         ]);
 
         try {
-            $workshift = null;
-
-            DB::transaction(function () use ($service, $request, $id, &$workshift) {
-                $workshift = $service->update($id, [
+            DB::transaction(function () use ($service, $request, $id) {
+                $service->update($id, [
                     'name' => $request->input('name'),
                     'details' => collect($request->input('details'))->map(function ($item) {
                         return [
@@ -185,7 +183,7 @@ class WorkshiftController extends RestController
                 ]);
             });
 
-            return $this->sendItem($service->find($workshift->id));
+            return $this->sendItem($service->find($id));
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Workshift not found');
         } catch (\Exception $e) {
