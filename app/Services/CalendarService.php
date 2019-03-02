@@ -62,7 +62,7 @@ class CalendarService
                 return new CalendarEvent([
                     'title' => $item['title'],
                     'start' => $item['start'],
-                    'end' => ! isset($item['end']) ? null : $item['end'],
+                    'end' => $item['end'],
                     'attendance_type_id' => $item['attendance_type_id'],
                 ]);
             })
@@ -141,7 +141,7 @@ class CalendarService
         $calendar->events()->create([
             'title' => $event['title'],
             'start' => $event['start'],
-            'end' => ! isset($event['end']) ? null : $event['end'],
+            'end' => $event['end'],
             'attendance_type_id' => $event['attendance_type_id'],
         ]);
     }
@@ -167,7 +167,7 @@ class CalendarService
         $event->update([
             'title' => $data['title'],
             'start' => $data['start'],
-            'end' => ! isset($data['end']) ? null : $data['end'],
+            'end' => $data['end'],
             'attendance_type_id' => $data['attendance_type_id'],
         ]);
     }
