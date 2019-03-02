@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Repositories\AccessRepo;
 use App\Repositories\RepositoryInterface;
+use App\Repositories\RoleRepo;
 use App\Role;
 use Illuminate\Support\Collection;
 
@@ -21,7 +23,7 @@ class RoleService
     /**
      * RoleService constructor.
      */
-    public function __construct(RepositoryInterface $role_repo, RepositoryInterface $access_repo)
+    public function __construct(RoleRepo $role_repo, AccessRepo $access_repo)
     {
         $this->repo = $role_repo;
         $this->access_repo = $access_repo;
