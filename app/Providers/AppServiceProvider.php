@@ -17,10 +17,5 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Services\AuthService::class, function () {
             return new \App\Services\AuthService;
         });
-
-        // Register CalendarService
-        $this->app->singleton(\App\Services\CalendarService::class, function () {
-            return new \App\Services\CalendarService;
-        });
     }
 }
