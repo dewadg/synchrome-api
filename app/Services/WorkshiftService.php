@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\RepositoryInterface;
 use App\Repositories\WorkshiftRepo;
 use App\Workshift;
 use App\WorkshiftDetail;
@@ -10,16 +11,16 @@ use Illuminate\Support\Collection;
 class WorkshiftService
 {
     /**
-     * @var WorkshiftRepo
+     * @var RepositoryInterface
      */
     protected $repo;
 
     /**
      * WorkshiftService constructor.
      */
-    public function __construct()
+    public function __construct(WorkshiftRepo $repo)
     {
-        $this->repo = new WorkshiftRepo;
+        $this->repo = $repo;
     }
 
     /**
@@ -80,10 +81,6 @@ class WorkshiftService
     {
         $workshift = $this->find($id);
 
-        $workshift->update([
-            'name' => $data['name'],
-        ]);
-
         $details = collect($data['details'])->map(function ($item) {
             return new WorkshiftDetail([
                 'index' => $item['index'],
@@ -95,9 +92,10 @@ class WorkshiftService
 
         $workshift->details->each->delete();
         $workshift->details()->saveMany($details);
-        $workshift->load('details');
 
-        return $workshift;
+        return $workshift->update([
+            'name' => $data['name'],
+        ]);
     }
 
     public function delete($id)
