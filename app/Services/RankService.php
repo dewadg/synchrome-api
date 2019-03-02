@@ -4,11 +4,12 @@ namespace App\Services;
 
 use App\Repositories\RepositoryInterface;
 use App\Rank;
+use Illuminate\Support\Collection;
 
 class RankService
 {
     /**
-     * @var RankRepo
+     * @var RepositoryInterface
      */
     protected $repo;
 
@@ -23,7 +24,7 @@ class RankService
     /**
      * Returns all ranks.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function get()
     {
@@ -45,7 +46,7 @@ class RankService
      * Returns rank by ID.
      *
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Rank
      */
     public function find($id)
     {
