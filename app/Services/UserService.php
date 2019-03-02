@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\RepositoryInterface;
+use App\Repositories\UserRepo;
 use App\User;
 
 class UserService
@@ -41,7 +42,7 @@ class UserService
         return User::create([
             'name' => $data['name'],
             'password' => app('hash')->make($data['password']),
-            'full_name' => $data['name'],
+            'full_name' => $data['full_name'],
             'role_id' => $data['role_id'],
         ]);
     }
