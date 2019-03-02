@@ -63,7 +63,7 @@ build:
 
 deploy:
   stage: deploy
-  image: php:7.2-cli
+  image: ubuntu:latest
   only:
     - master
   before_script:
