@@ -7,7 +7,6 @@ use App\Transformers\RoleTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Swagger\Annotations as SWG;
 
 class RoleController extends RestController
 {
@@ -65,10 +64,14 @@ class RoleController extends RestController
         ]);
 
         try {
-            $rank = $service->create([
-                'name' => $request->input('name'),
-                'accesses' => $request->input('accesses'),
-            ]);
+            $rank = null;
+            
+            DB::transaction(function () use ($service, $request, &$rank) {
+                $rank = $service->create([
+                    'name' => $request->input('name'),
+                    'accesses' => $request->input('accesses'),
+                ]);
+            });
 
             return $this->sendItem($rank, null, 201);
         } catch (\Exception $e) {
@@ -146,14 +149,14 @@ class RoleController extends RestController
         ]);
 
         try {
-            DB::transaction(function () use ($service, $request, &$rank, $id) {
-                $rank = $service->update($id, [
+            DB::transaction(function () use ($service, $request, $id) {
+                $service->update($id, [
                     'name' => $request->input('name'),
                     'accesses' => $request->input('accesses'),
                 ]);
             });
 
-            return $this->sendItem($rank);
+            return $this->sendItem($service->find($id));
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Role not found');
         } catch (\Exception $e) {
