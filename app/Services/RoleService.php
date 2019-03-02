@@ -2,30 +2,29 @@
 
 namespace App\Services;
 
-use App\Repositories\AccessRepo;
-use App\Repositories\RoleRepo;
+use App\Repositories\RepositoryInterface;
 use App\Role;
 use Illuminate\Support\Collection;
 
 class RoleService
 {
     /**
-     * @var RoleRepo
+     * @var RepositoryInterface
      */
     protected $repo;
 
     /**
-     * @var AccessRepo
+     * @var RepositoryInterface
      */
     protected $access_repo;
 
     /**
      * RoleService constructor.
      */
-    public function __construct()
+    public function __construct(RepositoryInterface $role_repo, RepositoryInterface $access_repo)
     {
-        $this->repo = new RoleRepo;
-        $this->access_repo = new AccessRepo;
+        $this->repo = $role_repo;
+        $this->access_repo = $access_repo;
     }
 
     /**
@@ -48,7 +47,18 @@ class RoleService
     {
         $role = Role::create(['name' => $data['name']]);
 
-        $role->accesses()->sync($data['accesses']);
+        if ($data['accesses'] === '*') {
+            $accesses = $this->access_repo
+                ->get()
+                ->map(function ($item) {
+                    return $item->id;
+                })
+                ->all();
+
+            $role->accesses()->sync($accesses);
+        } else {
+            $role->accesses()->sync($data['accesses']);
+        }
 
         return $role;
     }
@@ -75,10 +85,20 @@ class RoleService
     {
         $role = $this->find($id);
 
-        $role->update(['name' => $data['name']]);
-        $role->accesses()->sync($data['accesses']);
+        if (isset($data['accesses']) && $data['accesses'] === '*') {
+            $accesses = $this->access_repo
+                ->get()
+                ->map(function ($item) {
+                    return $item->id;
+                })
+                ->all();
 
-        return $role;
+            $role->accesses()->sync($accesses);
+        } elseif (isset($data['accesses'])) {
+            $role->accesses()->sync($data['accesses']);
+        }
+
+        return $role->update(['name' => $data['name']]);
     }
 
     /**
