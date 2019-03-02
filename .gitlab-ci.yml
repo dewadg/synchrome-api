@@ -43,7 +43,6 @@ unit_test:
   before_script:
     - docker-php-ext-install pdo pdo_mysql
   script:
-    - php artisan migrate:fresh --seed
     - vendor/bin/phpunit
 
 build:
@@ -64,7 +63,7 @@ build:
 
 deploy:
   stage: deploy
-  image: ubuntu
+  image: php:7.2-cli
   only:
     - master
   before_script:
@@ -97,5 +96,6 @@ deploy:
           -e ACCESS_TOKEN_AGE=$PROD_ACCESS_TOKEN_AGE \
           $CONTAINER_REGISTRY;
         docker start $CONTAINER_NAME;
+        docker exec -d $CONTAINER_NAME php artisan migrate:seed;
         exit;
       "
