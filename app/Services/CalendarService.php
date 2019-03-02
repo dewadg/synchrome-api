@@ -6,28 +6,29 @@ use App\Calendar;
 use App\CalendarEvent;
 use App\Repositories\AttendanceTypeRepo;
 use App\Repositories\CalendarRepo;
+use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CalendarService
 {
     /**
-     * @var CalendarRepo
+     * @var RepositoryInterface
      */
     protected $repo;
 
     /**
-     * @var AttendanceTypeRepo
+     * @var RepositoryInterface
      */
     protected $attendance_type_repo;
 
     /**
      * CalendarService constructor.
      */
-    public function __construct()
+    public function __construct(CalendarRepo $repo, AttendanceTypeRepo $attendance_type_repo)
     {
-        $this->repo = new CalendarRepo;
-        $this->attendance_type_repo = new AttendanceTypeRepo;
+        $this->repo = $repo;
+        $this->attendance_type_repo = $attendance_type_repo;
     }
 
     /**
@@ -78,20 +79,18 @@ class CalendarService
      *
      * @param $id
      * @param array $data
-     * @return Calendar
+     * @return boolean
      */
     public function update($id, array $data)
     {
         $calendar = $this->repo->find($id);
 
-        $calendar->update([
+        return $calendar->update([
             'name' => $data['name'],
             'start' => $data['start'],
             'end' => $data['end'],
             'published' => $data['published'],
         ]);
-
-        return $calendar;
     }
 
     /**
@@ -134,7 +133,6 @@ class CalendarService
      *
      * @param $id
      * @param array $event
-     * @return Calendar
      */
     public function addEvent($id, array $event)
     {
@@ -146,10 +144,6 @@ class CalendarService
             'end' => ! isset($event['end']) ? null : $event['end'],
             'attendance_type_id' => $event['attendance_type_id'],
         ]);
-
-        $calendar->load('events');
-
-        return $calendar;
     }
 
     /**
@@ -158,7 +152,7 @@ class CalendarService
      * @param $calendar_id
      * @param  $event_id
      * @param array $data
-     * @return Calendar
+     * @return boolean
      * @throws ModelNotFoundException
      */
     public function updateEvent($calendar_id, $event_id, array $data)
@@ -176,10 +170,6 @@ class CalendarService
             'end' => ! isset($data['end']) ? null : $data['end'],
             'attendance_type_id' => $data['attendance_type_id'],
         ]);
-
-        $calendar->load('events');
-
-        return $calendar;
     }
 
     /**
