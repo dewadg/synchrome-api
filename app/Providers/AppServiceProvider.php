@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use App\Repositories\AccessRepo;
+use App\Repositories\AttendanceTypeRepo;
+use App\Repositories\CalendarRepo;
 use App\Repositories\RankRepo;
 use App\Repositories\RoleRepo;
 use App\Services\AuthService;
+use App\Services\CalendarService;
 use App\Services\RankService;
 use App\Services\RoleService;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
         // Register RankService
         $this->app->bind(RankService::class, function () {
             return new RankService(new RankRepo);
+        });
+
+        // Register CalendarService
+        $this->app->bind(CalendarService::class, function () {
+            return new CalendarService(new CalendarRepo, new AttendanceTypeRepo);
         });
     }
 }
