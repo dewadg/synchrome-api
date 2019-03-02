@@ -114,6 +114,10 @@ $router->post('calendars/{id}/events', [
     'uses' => 'CalendarController@addEvent',
     'middleware' => ['auth'],
 ]);
+$router->patch('calendars/{calendar_id}/events/{event_id}', [
+    'uses' => 'CalendarController@updateEvent',
+    'middleware' => ['auth'],
+]);
 $router->delete('calendars/{calendar_id}/events/{event_id}', [
     'uses' => 'CalendarController@deleteEvent',
     'middleware' => ['auth'],

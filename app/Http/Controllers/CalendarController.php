@@ -7,6 +7,7 @@ use App\Transformers\CalendarTransformer;
 use App\Transformers\CalendarEventTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CalendarController extends RestController
 {
@@ -185,14 +186,16 @@ class CalendarController extends RestController
         ]);
 
         try {
-            $calendar = $service->update($id, [
-                'name' => $request->input('name'),
-                'start' => $request->input('start'),
-                'end' => $request->input('end'),
-                'published' => $request->input('published'),
-            ]);
+            DB::transaction(function () use ($service, $request, $id) {
+                $service->update($id, [
+                    'name' => $request->input('name'),
+                    'start' => $request->input('start'),
+                    'end' => $request->input('end'),
+                    'published' => $request->input('published'),
+                ]);
+            });
 
-            return $this->sendItem($calendar);
+            return $this->sendItem($service->find($id));
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Calendar not found');
         } catch (\Exception $e) {
@@ -230,7 +233,9 @@ class CalendarController extends RestController
     public function destroy(CalendarService $service, $id)
     {
         try {
-            $service->delete($id);
+            DB::transaction(function () use ($service, $id) {
+                $service->delete($id);
+            });
 
             return $this->response();
         } catch (ModelNotFoundException $e) {
@@ -270,9 +275,9 @@ class CalendarController extends RestController
     public function getEvents(CalendarService $service, $id)
     {
         try {
-            $calendar = $service->find($id);
+            $events = $service->getEvents($id);
 
-            return $this->sendCollection($calendar->events, CalendarEventTransformer::class);
+            return $this->sendCollection($events, CalendarEventTransformer::class);
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Calendar not found');
         } catch (\Exception $e) {
@@ -318,14 +323,16 @@ class CalendarController extends RestController
         ]);
 
         try {
-            $calendar = $service->addEvent($id, [
-                'title' => $request->input('title'),
-                'start' => $request->input('start'),
-                'end' => $request->input('end'),
-                'attendance_type_id' => $request->input('attendanceTypeId'),
-            ]);
+            DB::transaction(function () use ($service, $request, $id) {
+                $service->addEvent($id, [
+                    'title' => $request->input('title'),
+                    'start' => $request->input('start'),
+                    'end' => $request->input('end'),
+                    'attendance_type_id' => $request->input('attendanceTypeId'),
+                ]);
+            });
 
-            return $this->sendItem($calendar);
+            return $this->sendItem($service->find($id));
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Calendar not found');
         } catch (\Exception $e) {
@@ -384,14 +391,14 @@ class CalendarController extends RestController
         ]);
 
         try {
-            $calendar = $service->updateEvent($calendar_id, $event_id, [
+            $service->updateEvent($calendar_id, $event_id, [
                 'title' => $request->input('title'),
                 'start' => $request->input('start'),
                 'end' => $request->input('end'),
                 'attendance_type_id' => $request->input('attendanceTypeId'),
             ]);
 
-            return $this->sendItem($calendar);
+            return $this->sendItem($service->find($calendar_id));
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse('Calendar not found');
         } catch (\Exception $e) {
@@ -429,14 +436,16 @@ class CalendarController extends RestController
      * )
      *
      * @param CalendarService $service
-     * @param [type] $calendar_id
-     * @param [type] $event_id
+     * @param $calendar_id
+     * @param $event_id
      * @return Illuminate\Http\JsonResponse
      */
     public function deleteEvent(CalendarService $service, $calendar_id, $event_id)
     {
         try {
-            $service->deleteEvent($calendar_id, $event_id);
+            DB::transaction(function () use ($service, $calendar_id, $event_id) {
+                $service->deleteEvent($calendar_id, $event_id);
+            });
 
             return $this->response();
         } catch (ModelNotFoundException $e) {
