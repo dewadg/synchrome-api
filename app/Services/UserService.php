@@ -2,22 +2,22 @@
 
 namespace App\Services;
 
-use App\Repositories\UserRepo;
+use App\Repositories\RepositoryInterface;
 use App\User;
 
 class UserService
 {
     /**
-     * @var UserRepo
+     * @var RepositoryInterface
      */
     protected $repo;
 
     /**
      * UserService constructor.
      */
-    public function __construct()
+    public function __construct(UserRepo $repo)
     {
-        $this->repo = new UserRepo;
+        $this->repo = $repo;
     }
 
     /**
@@ -79,7 +79,7 @@ class UserService
      * Deletes a user by ID.
      *
      * @param $id
-     * @return int
+     * @return boolean
      */
     public function delete($id)
     {
