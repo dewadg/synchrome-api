@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\AccessRepo;
 use App\Repositories\RankRepo;
+use App\Repositories\RoleRepo;
 use App\Services\AuthService;
 use App\Services\RankService;
+use App\Services\RoleService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
         // Register AuthService
         $this->app->singleton(AuthService::class, function () {
             return new AuthService;
+        });
+
+        // Register RoleService
+        $this->app->bind(RoleService::class, function () {
+            return new RoleService(new RoleRepo, new AccessRepo);
         });
 
         // Register RankService
