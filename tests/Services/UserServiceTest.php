@@ -5,7 +5,7 @@ use App\Repositories\UserRepo;
 use Faker\Factory;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 
-class RoleServiceTest extends TestCase
+class UserServiceTest extends TestCase
 {
     use DatabaseMigrations;
 
