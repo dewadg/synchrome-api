@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\RepositoryInterface;
-use App\Repositories\UserRepo;
 use App\User;
 
 class UserService
@@ -16,7 +15,7 @@ class UserService
     /**
      * UserService constructor.
      */
-    public function __construct(UserRepo $repo)
+    public function __construct(RepositoryInterface $repo)
     {
         $this->repo = $repo;
     }

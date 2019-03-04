@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\RepositoryInterface;
-use App\Repositories\WorkshiftRepo;
 use App\Workshift;
 use App\WorkshiftDetail;
 use Illuminate\Support\Collection;
@@ -18,7 +17,7 @@ class WorkshiftService
     /**
      * WorkshiftService constructor.
      */
-    public function __construct(WorkshiftRepo $repo)
+    public function __construct(RepositoryInterface $repo)
     {
         $this->repo = $repo;
     }
