@@ -16,7 +16,7 @@ class EchelonTypeRepo implements RepositoryInterface
         return EchelonType::findOrFail($id);
     }
 
-    public function delete()
+    public function delete($id)
     {
         return $this->find($id)->delete();
     }
