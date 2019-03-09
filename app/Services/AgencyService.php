@@ -97,4 +97,15 @@ class AgencyService
             'address' => isset($data['address']) ? $data['address'] : null,
         ]);
     }
+
+    /**
+     * Deletes Agency by ID.
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->repo->delete($id);
+    }
 }

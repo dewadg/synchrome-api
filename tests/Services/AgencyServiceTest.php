@@ -87,4 +87,19 @@ class AgencyServiceTest extends TestCase
 
         $this->assertTrue($output);
     }
+
+    public function testDelete()
+    {
+        $mocked_id = $this->faker->name;
+        $mocked_name = $this->faker->name;
+
+        $this->test_agency_service->create([
+            'id' => $mocked_id,
+            'name' => $mocked_name,
+        ]);
+
+        $output = $this->test_agency_service->delete($mocked_id);
+
+        $this->assertTrue($output);
+    }
 }
