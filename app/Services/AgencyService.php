@@ -59,7 +59,7 @@ class AgencyService
             'head_echelon_id' => $head_echelon_id,
             'name' => $data['name'],
             'phone' => isset($data['phone']) ? $data['phone'] : null,
-            'address' => isset($data['address']) ? $data['address'] : null
+            'address' => isset($data['address']) ? $data['address'] : null,
         ]);
     }
 
@@ -72,5 +72,29 @@ class AgencyService
     public function find($id)
     {
         return $this->repo->find($id);
+    }
+
+    /**
+     * Updates Agency.
+     *
+     * @param $id
+     * @param array $data
+     * @return bool
+     */
+    public function update($id, array $data)
+    {
+        $agency = $this->repo->find($id);
+        $head_echelon_id = isset($data['head_echelon_id']) ? $data['head_echelon_id'] : null;
+
+        if (!is_null($head_echelon_id)) {
+            $head_echelon_id = $this->echelon_repo->find($head_echelon_id)->id;
+        }
+
+        return $agency->update([
+            'head_echelon_id' => $head_echelon_id,
+            'name' => $data['name'],
+            'phone' => isset($data['phone']) ? $data['phone'] : null,
+            'address' => isset($data['address']) ? $data['address'] : null,
+        ]);
     }
 }

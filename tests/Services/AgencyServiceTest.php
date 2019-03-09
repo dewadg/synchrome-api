@@ -69,4 +69,22 @@ class AgencyServiceTest extends TestCase
         $this->assertEquals($mocked_id, $expected->id);
         $this->assertEquals($mocked_name, $expected->name);
     }
+
+    public function testUpdate()
+    {
+        $mocked_id = $this->faker->name;
+        $mocked_name = $this->faker->name;
+        $mocked_updated_name = $mocked_name . '123';
+
+        $this->test_agency_service->create([
+            'id' => $mocked_id,
+            'name' => $mocked_name,
+        ]);
+        
+        $output = $this->test_agency_service->update($mocked_id, [
+            'name' => $mocked_updated_name,
+        ]);
+
+        $this->assertTrue($output);
+    }
 }
