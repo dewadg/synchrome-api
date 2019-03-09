@@ -9,11 +9,13 @@ use App\Repositories\CalendarRepo;
 use App\Repositories\EchelonRepo;
 use App\Repositories\RankRepo;
 use App\Repositories\RoleRepo;
+use App\Repositories\WorkshiftRepo;
 use App\Services\AuthService;
 use App\Services\AgencyService;
 use App\Services\CalendarService;
 use App\Services\RankService;
 use App\Services\RoleService;
+use App\Services\WorkshiftService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -43,6 +45,11 @@ class AppServiceProvider extends ServiceProvider
         // Register CalendarService
         $this->app->bind(CalendarService::class, function () {
             return new CalendarService(new CalendarRepo, new AttendanceTypeRepo);
+        });
+
+        // Register WorkshiftService
+        $this->app->bind(WorkshiftService::class, function () {
+            return new WorkshiftService(new WorkshiftRepo);
         });
 
         // Register AgencyService
