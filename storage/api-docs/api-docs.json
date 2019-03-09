@@ -69,6 +69,37 @@
                 "responses": {
                     "200": {
                         "description": "An agency."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Delete an agency.",
+                "operationId": "agenciesDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    },
+                    "404": {
+                        "description": "Not found."
                     }
                 },
                 "security": [
@@ -102,6 +133,9 @@
                 "responses": {
                     "200": {
                         "description": "Updated."
+                    },
+                    "404": {
+                        "description": "Not found."
                     }
                 },
                 "security": [

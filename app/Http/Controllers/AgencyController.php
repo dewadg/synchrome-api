@@ -115,6 +115,10 @@ class AgencyController extends RestController
      *     @SWG\Response(
      *         response=200,
      *         description="An agency."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
      *     )
      * )
      *
@@ -153,6 +157,10 @@ class AgencyController extends RestController
      *     @SWG\Response(
      *         response=200,
      *         description="Updated."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
      *     )
      * )
      *
@@ -172,6 +180,47 @@ class AgencyController extends RestController
             });
 
             return $this->sendItem($this->service->find($id));
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
+
+    /**
+     * @SWG\Delete(
+     *     path="/agencies/{id}",
+     *     tags={"Agencies"},
+     *     operationId="agenciesDestroy",
+     *     summary="Delete an agency.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
+     *     )
+     * )
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+                $this->service->delete($id);
+            });
+
+            return response()->json();
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse($e->getMessage());
         } catch (\Exception $e) {

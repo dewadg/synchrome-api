@@ -162,3 +162,7 @@ $router->patch('agencies/{id}', [
     'uses' => 'AgencyController@update',
     'middleware' => ['auth'],
 ]);
+$router->delete('agencies/{id}', [
+    'uses' => 'AgencyController@destroy',
+    'middleware' => ['auth'],
+]);
