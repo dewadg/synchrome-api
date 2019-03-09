@@ -144,3 +144,8 @@ $router->delete('workshifts/{id}', [
     'uses' => 'WorkshiftController@destroy',
     'middleware' => ['auth'],
 ]);
+
+$router->get('agencies', [
+    'uses' => 'AgencyController@index',
+    'middleware' => ['auth'],
+]);
