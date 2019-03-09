@@ -48,9 +48,15 @@ class AgencyService
      */
     public function create(array $data)
     {
+        $head_echelon_id = isset($data['head_echelon_id']) ? $data['head_echelon_id'] : null;
+
+        if (! is_null($head_echelon_id)) {
+            $head_echelon_id = $this->echelon_repo->find($head_echelon_id)->id;
+        }
+
         return Agency::create([
             'id' => $data['id'],
-            'head_echelon_id' => isset($data['head_echelon_id']) ? $data['head_echelon_id'] : null,
+            'head_echelon_id' => $head_echelon_id,
             'name' => $data['name'],
             'phone' => isset($data['phone']) ? $data['phone'] : null,
             'address' => isset($data['address']) ? $data['address'] : null

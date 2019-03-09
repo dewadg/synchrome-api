@@ -45,6 +45,7 @@ class AgencyServiceTest extends TestCase
         $agency = $this->test_agency_service->create([
             'id' => $mocked_id,
             'name' => $mocked_name,
+            'head_echelon_id' => '1.1.01',
         ]);
 
         $this->assertInstanceOf(Agency::class, $agency);
