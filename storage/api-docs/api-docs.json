@@ -76,6 +76,39 @@
                         "basicAuth": []
                     }
                 ]
+            },
+            "patch": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Update an agency.",
+                "operationId": "agenciesUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateAgencyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         },
         "/attendance-types": {
@@ -822,6 +855,22 @@
                     "description": "Class Agency",
                     "type": "string"
                 },
+                "name": {
+                    "description": "Class Agency",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Class Agency",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Class Agency",
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateAgencyRequest": {
+            "properties": {
                 "name": {
                     "description": "Class Agency",
                     "type": "string"

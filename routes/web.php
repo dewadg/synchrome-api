@@ -158,3 +158,7 @@ $router->get('agencies/{id}', [
     'uses' => 'AgencyController@show',
     'middleware' => ['auth'],
 ]);
+$router->patch('agencies/{id}', [
+    'uses' => 'AgencyController@update',
+    'middleware' => ['auth'],
+]);

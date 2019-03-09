@@ -130,4 +130,52 @@ class AgencyController extends RestController
             return $this->notFoundResponse($e->getMessage());
         }
     }
+
+    /**
+     * @SWG\Patch(
+     *     path="/agencies/{id}",
+     *     tags={"Agencies"},
+     *     operationId="agenciesUpdate",
+     *     summary="Update an agency.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateAgencyRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $this->service->update($id, [
+                    'name' => $request->input('name'),
+                    'phone' => $request->input('phone'),
+                    'address' => $request->input('address'),
+                ]);
+            });
+
+            return $this->sendItem($this->service->find($id));
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
 }

@@ -27,6 +27,21 @@ use Illuminate\Database\Eloquent\Model;
  *         type="string"
  *     )
  * )
+ * @SWG\Definition(
+ *     definition="UpdateAgencyRequest",
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="phone",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="address",
+ *         type="string"
+ *     )
+ * )
  */
 class Agency extends Model
 {
