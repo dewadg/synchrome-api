@@ -56,4 +56,15 @@ class AgencyService
             'address' => isset($data['address']) ? $data['address'] : null
         ]);
     }
+
+    /**
+     * Returns Agency by ID.
+     *
+     * @param $id
+     * @return Agency
+     */
+    public function find($id)
+    {
+        return $this->repo->find($id);
+    }
 }
