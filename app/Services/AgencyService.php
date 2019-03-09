@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Agency;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
 
@@ -37,5 +38,22 @@ class AgencyService
     public function get()
     {
         return $this->repo->get();
+    }
+
+    /**
+     * Creates new agency and returns it.
+     *
+     * @param array $data
+     * @return Agency
+     */
+    public function create(array $data)
+    {
+        return Agency::create([
+            'id' => $data['id'],
+            'head_echelon_id' => isset($data['head_echelon_id']) ? $data['head_echelon_id'] : null,
+            'name' => $data['name'],
+            'phone' => isset($data['phone']) ? $data['phone'] : null,
+            'address' => isset($data['address']) ? $data['address'] : null
+        ]);
     }
 }

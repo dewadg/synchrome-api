@@ -6,6 +6,7 @@ use App\Services\AgencyService;
 use Faker\Factory;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Illuminate\Support\Collection;
+use App\Agency;
 
 class AgencyServiceTest extends TestCase
 {
@@ -34,5 +35,20 @@ class AgencyServiceTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $agencies);
         $this->assertCount(3, $agencies);
+    }
+
+    public function testCreate()
+    {
+        $mocked_id = $this->faker->name;
+        $mocked_name = $this->faker->name;
+
+        $agency = $this->test_agency_service->create([
+            'id' => $mocked_id,
+            'name' => $mocked_name,
+        ]);
+
+        $this->assertInstanceOf(Agency::class, $agency);
+        $this->assertEquals($mocked_id, $agency->id);
+        $this->assertEquals($mocked_name, $agency->name);
     }
 }
