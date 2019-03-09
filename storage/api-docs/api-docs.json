@@ -5,6 +5,25 @@
         "version": "0.1"
     },
     "paths": {
+        "/agencies": {
+            "get": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Fetch list of agencies.",
+                "operationId": "agenciesIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of agencies."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/attendance-types": {
             "get": {
                 "tags": [
@@ -925,11 +944,11 @@
                                 "description": "Class Workshift",
                                 "type": "integer"
                             },
-                            "check_in": {
+                            "checkIn": {
                                 "description": "Class Workshift",
                                 "type": "string"
                             },
-                            "check_out": {
+                            "checkOut": {
                                 "description": "Class Workshift",
                                 "type": "string"
                             },
@@ -957,11 +976,11 @@
                                 "description": "Class Workshift",
                                 "type": "integer"
                             },
-                            "check_in": {
+                            "checkOn": {
                                 "description": "Class Workshift",
                                 "type": "string"
                             },
-                            "check_out": {
+                            "checkOut": {
                                 "description": "Class Workshift",
                                 "type": "string"
                             },

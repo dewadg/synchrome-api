@@ -28,6 +28,18 @@ class AgencyController extends RestController
     }
 
     /**
+     * @SWG\Get(
+     *     path="/agencies",
+     *     tags={"Agencies"},
+     *     operationId="agenciesIndex",
+     *     summary="Fetch list of agencies.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="List of agencies."
+     *     )
+     * )
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()
