@@ -145,7 +145,12 @@ $router->delete('workshifts/{id}', [
     'middleware' => ['auth'],
 ]);
 
+// Agencies
 $router->get('agencies', [
     'uses' => 'AgencyController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('agencies', [
+    'uses' => 'AgencyController@store',
     'middleware' => ['auth'],
 ]);

@@ -4,6 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Agency
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="CreateAgencyRequest",
+ *     @SWG\Property(
+ *         property="id",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="phone",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="address",
+ *         type="string"
+ *     )
+ * )
+ */
 class Agency extends Model
 {
     /**

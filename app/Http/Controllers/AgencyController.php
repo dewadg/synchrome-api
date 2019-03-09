@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\AgencyService;
 use App\Transformers\AgencyTransformer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgencyController extends RestController
 {
@@ -45,5 +47,54 @@ class AgencyController extends RestController
     public function index()
     {
         return $this->sendCollection($this->service->get());
+    }
+
+    /**
+     * @SWG\Post(
+     *     path="/agencies",
+     *     tags={"Agencies"},
+     *     operationId="agenciesStore",
+     *     summary="Create a new agency.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CreateAgencyRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|unique:agencies,id',
+            'name' => 'required',
+            'phone' => 'present',
+            'address' => 'present',
+        ]);
+
+        try {
+            $agency = null;
+
+            DB::transaction(function () use ($request, &$agency) {
+                $agency = $this->service->create([
+                    'id' => $request->input('id'),
+                    'name' => $request->input('name'),
+                    'phone' => $request->input('phone'),
+                    'address' => $request->input('address'),
+                ]);
+            });
+
+            return $this->sendItem($agency, null, 201);
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
     }
 }

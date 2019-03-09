@@ -22,6 +22,33 @@
                         "basicAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Create a new agency.",
+                "operationId": "agenciesStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateAgencyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         },
         "/attendance-types": {
@@ -762,6 +789,26 @@
         }
     },
     "definitions": {
+        "CreateAgencyRequest": {
+            "properties": {
+                "id": {
+                    "description": "Class Agency",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Class Agency",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Class Agency",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Class Agency",
+                    "type": "string"
+                }
+            }
+        },
         "CreateCalendarRequest": {
             "properties": {
                 "name": {
