@@ -154,3 +154,7 @@ $router->post('agencies', [
     'uses' => 'AgencyController@store',
     'middleware' => ['auth'],
 ]);
+$router->get('agencies/{id}', [
+    'uses' => 'AgencyController@show',
+    'middleware' => ['auth'],
+]);

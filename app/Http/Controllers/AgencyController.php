@@ -6,6 +6,7 @@ use App\Services\AgencyService;
 use App\Transformers\AgencyTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AgencyController extends RestController
 {
@@ -95,6 +96,38 @@ class AgencyController extends RestController
             return $this->sendItem($agency, null, 201);
         } catch (\Exception $e) {
             return $this->iseResponse($e->getMessage());
+        }
+    }
+
+    /**
+     *@SWG\Get(
+     *     path="/agencies/{id}",
+     *     tags={"Agencies"},
+     *     operationId="agenciesShow",
+     *     summary="Fetch single agency.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="An agency."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($id)
+    {
+        try {
+            return $this->sendItem($this->service->find($id));
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse($e->getMessage());
         }
     }
 }

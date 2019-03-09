@@ -51,6 +51,33 @@
                 ]
             }
         },
+        "/agencies/{id}": {
+            "get": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Fetch single agency.",
+                "operationId": "agenciesShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An agency."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/attendance-types": {
             "get": {
                 "tags": [
