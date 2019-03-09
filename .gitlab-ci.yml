@@ -25,7 +25,7 @@ unit_test:
   stage: test
   image: php:7.2-alpine
   services:
-    - mysql:latest
+    - mariadb:10.2
   only:
     - master
   variables:
@@ -36,7 +36,7 @@ unit_test:
     APP_KEY: $TEST_APP_KEY
     APP_TIMEZONE: $TEST_APP_TIMEZONE
     DB_CONNECTION: $TEST_DB_CONNECTION
-    DB_HOST: mysql
+    DB_HOST: mariadb
     DB_DATABASE: test_synchrome
     DB_USERNAME: root
     DB_PASSWORD: beepBeep
