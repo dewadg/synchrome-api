@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Agency extends Model
 {
     /**
+     * @var boolean
+     */
+    public $incrementing = false;
+
+    /**
      * @var array
      */
     protected $fillable = [
