@@ -541,6 +541,12 @@
                 "operationId": "echelonUpdate",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "params",
                         "in": "body",
                         "required": true,

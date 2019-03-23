@@ -156,6 +156,12 @@ class EchelonController extends RestController
      *     summary="Update new echelon.",
      *     security={{"basicAuth":{}}},
      *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
      *         name="params",
      *         in="body",
      *         required=true,
