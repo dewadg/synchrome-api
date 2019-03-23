@@ -139,7 +139,7 @@ class EchelonController extends RestController
      * @param $id
      * @return Illuminate\Http\JsonResponse
      */
-    public function find($id)
+    public function show($id)
     {
         try {
             return $this->sendItem($this->service->find($id));

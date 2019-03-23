@@ -181,6 +181,6 @@ $router->post('echelons', [
     'middleware' => ['auth'],
 ]);
 $router->get('echelons/{id}', [
-    'uses' => 'EchelonController@find',
+    'uses' => 'EchelonController@show',
     'middleware' => ['auth'],
 ]);
