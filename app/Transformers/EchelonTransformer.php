@@ -15,6 +15,11 @@ class EchelonTransformer extends TransformerAbstract
      */
     public function transform(Echelon $echelon)
     {
+        $supervisor = is_null($echelon->supervisor) ? null : [
+            'id' => $echelon->supervisor->id,
+            'name' => $echelon->supervisor->name,
+        ];
+
         return [
             'id' => $echelon->id,
             'name' => $echelon->name,
@@ -22,6 +27,7 @@ class EchelonTransformer extends TransformerAbstract
                 'id' => $echelon->type->id,
                 'name' => $echelon->type->name,
             ],
+            'supervisor' => $supervisor,
         ];
     }
 }
