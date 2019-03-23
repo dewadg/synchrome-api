@@ -54,4 +54,16 @@ class EchelonServiceTest extends TestCase
 
         $this->assertInstanceOf(Echelon::class, $echelon);
     }
+
+    public function testUpdate()
+    {
+        $expected_id = '1.1.01';
+
+        $output = $this->test_echelon_service->update($expected_id, [
+            'name' => $this->faker->name,
+            'echelon_type_id' => '3a',
+        ]);
+
+        $this->assertTrue($output);
+    }
 }

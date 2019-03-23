@@ -55,4 +55,18 @@ class EchelonService
     {
         return $this->repo->find($id);
     }
+
+    /**
+     * Updates an echelon.
+     *
+     * @param $id
+     * @param array $data
+     * @return bool
+     */
+    public function update($id, array $data)
+    {
+        $echelon = $this->repo->find($id);
+
+        return $echelon->update($data);
+    }
 }
