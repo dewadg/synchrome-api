@@ -34,6 +34,12 @@ class EchelonService
         return $this->repo->get();
     }
 
+    /**
+     * Creates an echelon.
+     *
+     * @param array $data
+     * @return Echelon
+     */
     public function create(array $data)
     {
         return Echelon::create($data);
