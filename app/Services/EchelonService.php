@@ -25,6 +25,16 @@ class EchelonService
     }
 
     /**
+     * Returns echelon types
+     *
+     * @return Collection
+     */
+    public function getTypes()
+    {
+        return $this->echelon_type_repo->get();
+    }
+
+    /**
      * Returns all echelons.
      *
      * @return Collection

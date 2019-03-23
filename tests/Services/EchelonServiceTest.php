@@ -28,6 +28,14 @@ class EchelonServiceTest extends TestCase
         $this->test_echelon_service = new EchelonService(new EchelonRepo, new EchelonTypeRepo);
     }
 
+    public function testGetTypes()
+    {
+        $echelon_types = $this->test_echelon_service->getTypes();
+
+        $this->assertInstanceOf(Collection::class, $echelon_types);
+        $this->assertCount(9, $echelon_types);
+    }
+
     public function testGet()
     {
         $echelons = $this->test_echelon_service->get();
