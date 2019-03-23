@@ -150,7 +150,7 @@ class EchelonController extends RestController
 
     /**
      * @SWG\Patch(
-     *     path="/echelons",
+     *     path="/echelons/{id}",
      *     tags={"Echelons"},
      *     operationId="echelonUpdate",
      *     summary="Update new echelon.",
@@ -198,7 +198,7 @@ class EchelonController extends RestController
 
     /**
      * @SWG\Delete(
-     *     path="/echelons",
+     *     path="/echelons/{id}",
      *     tags={"Echelons"},
      *     operationId="echelonDestroy",
      *     summary="Delete echelon.",
