@@ -95,8 +95,8 @@ class EchelonController extends RestController
         $this->validate($request, [
             'id' => 'required|unique:echelons,id',
             'name' => 'required',
-            'echelon_type_id' => 'required',
-            'supervisor_id' => 'present',
+            'echelonTypeId' => 'required',
+            'supervisorId' => 'present',
         ]);
 
         try {
@@ -106,8 +106,8 @@ class EchelonController extends RestController
                 $echelon = $this->service->create([
                     'id' => $request->input('id'),
                     'name' => $request->input('name'),
-                    'echelon_type_id' => $request->input('echelon_type_id'),
-                    'supervisor_id' => $request->input('supervisor_id'),
+                    'echelon_type_id' => $request->input('echelonTypeId'),
+                    'supervisor_id' => $request->input('supervisorId'),
                 ]);
             });
 
@@ -179,12 +179,18 @@ class EchelonController extends RestController
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'echelonTypeId' => 'required',
+            'supervisorId' => 'present',
+        ]);
+
         try {
             DB::transaction(function () use ($id, $request) {
                 $this->service->update($id, [
                     'name' => $request->input('name'),
-                    'echelon_type_id' => $request->input('echelon_type_id'),
-                    'supervisor_id' => $request->input('supervisor_id'),
+                    'echelon_type_id' => $request->input('echelonTypeId'),
+                    'supervisor_id' => $request->input('supervisorId'),
                 ]);
             });
 
