@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\EchelonService;
 use App\Transformers\EchelonTransformer;
 use App\Transformers\EchelonTypeTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -116,8 +117,34 @@ class EchelonController extends RestController
         }
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/echelons/{id}",
+     *     tags={"Echelons"},
+     *     operationId="echelonFind",
+     *     summary="Fetch echelon by ID.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Echelon with desired ID."
+     *     )
+     * )
+     *
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
     public function find($id)
     {
-
+        try {
+            return $this->sendItem($this->service->find($id));
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('Echelon not found');
+        }
     }
 }

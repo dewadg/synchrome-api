@@ -534,6 +534,33 @@
                 ]
             }
         },
+        "/echelons/{id}": {
+            "get": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Fetch echelon by ID.",
+                "operationId": "echelonFind",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Echelon with desired ID."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/whoami": {
             "get": {
                 "tags": [

@@ -180,3 +180,7 @@ $router->post('echelons', [
     'uses' => 'EchelonController@store',
     'middleware' => ['auth'],
 ]);
+$router->get('echelons/{id}', [
+    'uses' => 'EchelonController@find',
+    'middleware' => ['auth'],
+]);
