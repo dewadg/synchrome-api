@@ -188,3 +188,7 @@ $router->patch('echelons/{id}', [
     'uses' => 'EchelonController@update',
     'middleware' => ['auth'],
 ]);
+$router->delete('echelons/{id}', [
+    'uses' => 'EchelonController@destroy',
+    'middleware' => ['auth'],
+]);

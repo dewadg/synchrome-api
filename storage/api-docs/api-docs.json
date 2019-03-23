@@ -533,6 +533,23 @@
                     }
                 ]
             },
+            "delete": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Delete echelon.",
+                "operationId": "echelonDestroy",
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
             "patch": {
                 "tags": [
                     "Echelons"

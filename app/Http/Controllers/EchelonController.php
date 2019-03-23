@@ -195,4 +195,41 @@ class EchelonController extends RestController
             return $this->iseResponse($e->getMessage());
         }
     }
+
+    /**
+     * @SWG\Delete(
+     *     path="/echelons",
+     *     tags={"Echelons"},
+     *     operationId="echelonDestroy",
+     *     summary="Delete echelon.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted."
+     *     )
+     * )
+     *
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        try {
+            DB::transaction(function () use ($id) {
+                $this->service->delete($id);
+            });
+
+            return response()->json();
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('Echelon not found');
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
 }
