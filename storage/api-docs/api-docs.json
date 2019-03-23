@@ -469,6 +469,25 @@
                 ]
             }
         },
+        "/echelon-types": {
+            "get": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Fetch list of echelon types.",
+                "operationId": "echelonTypes",
+                "responses": {
+                    "200": {
+                        "description": "List of echelon types."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/whoami": {
             "get": {
                 "tags": [
