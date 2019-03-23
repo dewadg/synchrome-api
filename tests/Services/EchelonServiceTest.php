@@ -66,4 +66,13 @@ class EchelonServiceTest extends TestCase
 
         $this->assertTrue($output);
     }
+
+    public function testDelete()
+    {
+        $expected_id = '1.1.01.1.1';
+
+        $output = $this->test_echelon_service->delete($expected_id);
+
+        $this->assertTrue($output);
+    }
 }

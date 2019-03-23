@@ -69,4 +69,15 @@ class EchelonService
 
         return $echelon->update($data);
     }
+
+    /**
+     * Deletes echelon by ID.
+     *
+     * @param $id
+     * @return bool
+     */
+    public function delete($id)
+    {
+        return $this->repo->delete($id);
+    }
 }
