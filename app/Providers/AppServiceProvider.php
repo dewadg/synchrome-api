@@ -7,12 +7,14 @@ use App\Repositories\AgencyRepo;
 use App\Repositories\AttendanceTypeRepo;
 use App\Repositories\CalendarRepo;
 use App\Repositories\EchelonRepo;
+use App\Repositories\EchelonTypeRepo;
 use App\Repositories\RankRepo;
 use App\Repositories\RoleRepo;
 use App\Repositories\WorkshiftRepo;
 use App\Services\AuthService;
 use App\Services\AgencyService;
 use App\Services\CalendarService;
+use App\Services\EchelonService;
 use App\Services\RankService;
 use App\Services\RoleService;
 use App\Services\WorkshiftService;
@@ -55,6 +57,11 @@ class AppServiceProvider extends ServiceProvider
         // Register AgencyService
         $this->app->bind(AgencyService::class, function () {
             return new AgencyService(new AgencyRepo, new EchelonRepo);
+        });
+
+        // Register EchelonService
+        $this->app->bind(EchelonService::class, function () {
+            return new EchelonService(new EchelonRepo, new EchelonTypeRepo);
         });
     }
 }
