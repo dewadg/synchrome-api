@@ -488,6 +488,25 @@
                 ]
             }
         },
+        "/echelons": {
+            "get": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Fetch list of echelons.",
+                "operationId": "echelonIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of echelons."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/whoami": {
             "get": {
                 "tags": [

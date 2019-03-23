@@ -172,3 +172,7 @@ $router->get('echelon-types', [
     'uses' => 'EchelonController@types',
     'middleware' => ['auth'],
 ]);
+$router->get('echelons', [
+    'uses' => 'EchelonController@index',
+    'middleware' => ['auth'],
+]);

@@ -44,4 +44,25 @@ class EchelonController extends RestController
     {
         return $this->sendCollection($this->service->getTypes(), EchelonTypeTransformer::class);
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/echelons",
+     *     tags={"Echelons"},
+     *     operationId="echelonIndex",
+     *     summary="Fetch list of echelons.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="List of echelons."
+     *     )
+     * )
+     *
+     * @return Illuminate\Http\JsonResponse
+     */
+
+    public function index()
+    {
+        return $this->sendCollection($this->service->get());
+    }
 }
