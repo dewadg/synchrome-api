@@ -44,4 +44,15 @@ class EchelonService
     {
         return Echelon::create($data);
     }
+
+    /**
+     * Returns echelon by ID.
+     *
+     * @param $id
+     * @return Echelon
+     */
+    public function find($id)
+    {
+        return $this->repo->find($id);
+    }
 }
