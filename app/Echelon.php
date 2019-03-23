@@ -19,11 +19,11 @@ use Illuminate\Database\Eloquent\Model;
  *         type="string"
  *     ),
  *     @SWG\Property(
- *         property="echelon_type_id",
+ *         property="echelonTypeId",
  *         type="string"
  *     ),
  *     @SWG\Property(
- *         property="supervisor_id",
+ *         property="supervisorId",
  *         type="string"
  *     )
  * )
@@ -35,11 +35,11 @@ use Illuminate\Database\Eloquent\Model;
  *         type="string"
  *     ),
  *     @SWG\Property(
- *         property="echelon_type_id",
+ *         property="echelonTypeId",
  *         type="string"
  *     ),
  *     @SWG\Property(
- *         property="supervisor_id",
+ *         property="supervisorId",
  *         type="string"
  *     )
  * )

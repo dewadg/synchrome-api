@@ -1184,11 +1184,11 @@
                     "description": "Class Echelon",
                     "type": "string"
                 },
-                "echelon_type_id": {
+                "echelonTypeId": {
                     "description": "Class Echelon",
                     "type": "string"
                 },
-                "supervisor_id": {
+                "supervisorId": {
                     "description": "Class Echelon",
                     "type": "string"
                 }
@@ -1200,11 +1200,11 @@
                     "description": "Class Echelon",
                     "type": "string"
                 },
-                "echelon_type_id": {
+                "echelonTypeId": {
                     "description": "Class Echelon",
                     "type": "string"
                 },
-                "supervisor_id": {
+                "supervisorId": {
                     "description": "Class Echelon",
                     "type": "string"
                 }
