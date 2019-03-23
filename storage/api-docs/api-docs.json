@@ -532,6 +532,33 @@
                         "basicAuth": []
                     }
                 ]
+            },
+            "patch": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Update new echelon.",
+                "operationId": "echelonUpdate",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateEchelonRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         },
         "/echelons/{id}": {
@@ -1122,6 +1149,22 @@
                     "description": "Class Echelon",
                     "type": "string"
                 },
+                "name": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                },
+                "echelon_type_id": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                },
+                "supervisor_id": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateEchelonRequest": {
+            "properties": {
                 "name": {
                     "description": "Class Echelon",
                     "type": "string"

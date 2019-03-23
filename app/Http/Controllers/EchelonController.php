@@ -147,4 +147,46 @@ class EchelonController extends RestController
             return $this->notFoundResponse('Echelon not found');
         }
     }
+
+    /**
+     * @SWG\Patch(
+     *     path="/echelons",
+     *     tags={"Echelons"},
+     *     operationId="echelonUpdate",
+     *     summary="Update new echelon.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/UpdateEchelonRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Updated."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            DB::transaction(function () use ($id, $request) {
+                $this->service->update($id, [
+                    'name' => $request->input('name'),
+                    'echelon_type_id' => $request->input('echelon_type_id'),
+                    'supervisor_id' => $request->input('supervisor_id'),
+                ]);
+            });
+
+            return $this->sendItem($this->service->find($id));
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('Echelon not found');
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
 }

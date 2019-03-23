@@ -184,3 +184,7 @@ $router->get('echelons/{id}', [
     'uses' => 'EchelonController@show',
     'middleware' => ['auth'],
 ]);
+$router->patch('echelons/{id}', [
+    'uses' => 'EchelonController@update',
+    'middleware' => ['auth'],
+]);
