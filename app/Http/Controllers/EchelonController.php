@@ -62,7 +62,6 @@ class EchelonController extends RestController
      *
      * @return Illuminate\Http\JsonResponse
      */
-
     public function index()
     {
         return $this->sendCollection($this->service->get());
@@ -115,5 +114,10 @@ class EchelonController extends RestController
         } catch (\Exception $e) {
             return $this->iseResponse($e->getMessage());
         }
+    }
+
+    public function find($id)
+    {
+
     }
 }
