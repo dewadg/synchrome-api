@@ -1,5 +1,6 @@
 <?php
 
+use App\Echelon;
 use App\Repositories\EchelonRepo;
 use App\Repositories\EchelonTypeRepo;
 use App\Services\EchelonService;
@@ -33,5 +34,16 @@ class EchelonServiceTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $echelons);
         $this->assertCount(13, $echelons);
+    }
+
+    public function testCreate()
+    {
+        $echelon = $this->test_echelon_service->create([
+            'id' => $this->faker->name,
+            'name' => $this->faker->name,
+            'echelon_type_id' => '3a',
+        ]);
+
+        $this->assertInstanceOf(Echelon::class, $echelon);
     }
 }

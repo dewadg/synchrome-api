@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Echelon;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
 
@@ -31,5 +32,10 @@ class EchelonService
     public function get()
     {
         return $this->repo->get();
+    }
+
+    public function create(array $data)
+    {
+        return Echelon::create($data);
     }
 }
