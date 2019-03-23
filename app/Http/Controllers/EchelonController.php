@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\EchelonService;
 use App\Transformers\EchelonTransformer;
 use App\Transformers\EchelonTypeTransformer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EchelonController extends RestController
 {
@@ -64,5 +66,54 @@ class EchelonController extends RestController
     public function index()
     {
         return $this->sendCollection($this->service->get());
+    }
+
+    /**
+     * @SWG\Post(
+     *     path="/echelons",
+     *     tags={"Echelons"},
+     *     operationId="echelonStore",
+     *     summary="Create new echelon.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/CreateEchelonRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required|unique:echelons,id',
+            'name' => 'required',
+            'echelon_type_id' => 'required',
+            'supervisor_id' => 'present',
+        ]);
+
+        try {
+            $echelon = null;
+
+            DB::transaction(function () use ($request, &$echelon) {
+                $echelon = $this->service->create([
+                    'id' => $request->input('id'),
+                    'name' => $request->input('name'),
+                    'echelon_type_id' => $request->input('echelon_type_id'),
+                    'supervisor_id' => $request->input('supervisor_id'),
+                ]);
+            });
+
+            return $this->sendItem($echelon, null, 201);
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
     }
 }

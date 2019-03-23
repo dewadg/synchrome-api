@@ -505,6 +505,33 @@
                         "basicAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Echelons"
+                ],
+                "summary": "Create new echelon.",
+                "operationId": "echelonStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateEchelonRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
             }
         },
         "/whoami": {
@@ -1058,6 +1085,26 @@
                 },
                 "attendanceTypeId": {
                     "description": "Class Calendar",
+                    "type": "string"
+                }
+            }
+        },
+        "CreateEchelonRequest": {
+            "properties": {
+                "id": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                },
+                "echelon_type_id": {
+                    "description": "Class Echelon",
+                    "type": "string"
+                },
+                "supervisor_id": {
+                    "description": "Class Echelon",
                     "type": "string"
                 }
             }

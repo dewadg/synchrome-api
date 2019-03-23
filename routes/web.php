@@ -176,3 +176,7 @@ $router->get('echelons', [
     'uses' => 'EchelonController@index',
     'middleware' => ['auth'],
 ]);
+$router->post('echelons', [
+    'uses' => 'EchelonController@store',
+    'middleware' => ['auth'],
+]);

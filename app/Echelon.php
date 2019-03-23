@@ -4,6 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Echelon
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="CreateEchelonRequest",
+ *     @SWG\Property(
+ *         property="id",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="echelon_type_id",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="supervisor_id",
+ *         type="string"
+ *     )
+ * )
+ */
 class Echelon extends Model
 {
     /**
