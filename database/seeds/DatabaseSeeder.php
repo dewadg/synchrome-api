@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
          $this->call(EchelonsTableSeeder::class);
          $this->call(AgenciesTableSeeder::class);
          $this->call(TppTableSeeder::class);
+         $this->call(RanksTableSeeder::class);
+         $this->call(WorkshiftsTableSeeder::class);
+         $this->call(CalendarsTableSeeder::class);
     }
 }
