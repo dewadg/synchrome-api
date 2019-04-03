@@ -10,6 +10,11 @@ class Asn extends Model
     use SoftDeletes;
 
     /**
+     * @var string
+     */
+    protected $table = 'asn';
+
+    /**
      * @var boolean
      */
     public $incrementing = false;
