@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
          $this->call(RanksTableSeeder::class);
          $this->call(WorkshiftsTableSeeder::class);
          $this->call(CalendarsTableSeeder::class);
+         $this->call(AsnTableSeeder::class);
     }
 }
