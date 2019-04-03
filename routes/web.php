@@ -213,3 +213,24 @@ $router->delete('tpp/{id}', [
     'uses' => 'TppController@destroy',
     'middleware' => ['auth'],
 ]);
+
+$router->get('asn', [
+    'uses' => 'AsnController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('asn', [
+    'uses' => 'AsnController@store',
+    'middleware' => ['auth'],
+]);
+$router->get('asn/{id}', [
+    'uses' => 'AsnController@show',
+    'middleware' => ['auth'],
+]);
+$router->patch('asn/{id}', [
+    'uses' => 'AsnController@update',
+    'middleware' => ['auth'],
+]);
+$router->delete('asn/{id}', [
+    'uses' => 'AsnController@destroy',
+    'middleware' => ['auth'],
+]);

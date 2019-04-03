@@ -145,6 +145,137 @@
                 ]
             }
         },
+        "/asn": {
+            "get": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Fetch list of ASNs.",
+                "operationId": "asnIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of ASNs."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Create a new ASN.",
+                "operationId": "asnStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateAsnRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/asn/{id}": {
+            "get": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Fetch a ASN.",
+                "operationId": "asnShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A ASN."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Delete a ASN.",
+                "operationId": "asnDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Update ASN.",
+                "operationId": "asnUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateAsnRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/attendance-types": {
             "get": {
                 "tags": [
@@ -1196,6 +1327,94 @@
                 },
                 "address": {
                     "description": "Class Agency",
+                    "type": "string"
+                }
+            }
+        },
+        "CreateAsnRequest": {
+            "properties": {
+                "id": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "agencyId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "rankId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "echelonId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "tppId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "workshiftId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "calendarId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "pin": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Class Asn",
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateAsnRequest": {
+            "properties": {
+                "agencyId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "rankId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "echelonId": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "tppId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "workshiftId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "calendarId": {
+                    "description": "Class Asn",
+                    "type": "number"
+                },
+                "name": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "Class Asn",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Class Asn",
                     "type": "string"
                 }
             }

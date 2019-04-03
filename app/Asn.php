@@ -5,6 +5,98 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Asn
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="CreateAsnRequest",
+ *     @SWG\Property(
+ *         property="id",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="agencyId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="rankId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="echelonId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="tppId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="workshiftId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="calendarId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="pin",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="phone",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="address",
+ *         type="string"
+ *     )
+ * )
+ *
+ * @SWG\Definition(
+ *     definition="UpdateAsnRequest",
+ *     @SWG\Property(
+ *         property="agencyId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="rankId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="echelonId",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="tppId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="workshiftId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="calendarId",
+ *         type="number"
+ *     ),
+ *     @SWG\Property(
+ *         property="name",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="phone",
+ *         type="string"
+ *     ),
+ *     @SWG\Property(
+ *         property="address",
+ *         type="string"
+ *     )
+ * )
+ */
 class Asn extends Model
 {
     use SoftDeletes;

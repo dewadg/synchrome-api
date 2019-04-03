@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\AccessRepo;
 use App\Repositories\AgencyRepo;
+use App\Repositories\AsnRepo;
 use App\Repositories\AttendanceTypeRepo;
 use App\Repositories\CalendarRepo;
 use App\Repositories\EchelonRepo;
@@ -12,8 +13,9 @@ use App\Repositories\RankRepo;
 use App\Repositories\RoleRepo;
 use App\Repositories\TppRepo;
 use App\Repositories\WorkshiftRepo;
-use App\Services\AuthService;
 use App\Services\AgencyService;
+use App\Services\AsnService;
+use App\Services\AuthService;
 use App\Services\CalendarService;
 use App\Services\EchelonService;
 use App\Services\RankService;
@@ -69,6 +71,11 @@ class AppServiceProvider extends ServiceProvider
         // Register TppService
         $this->app->bind(TppService::class, function () {
             return new TppService(new TppRepo);
+        });
+
+        // Register AsnService
+        $this->app->bind(AsnService::class, function () {
+            return new AsnService(new AsnRepo);
         });
     }
 }
