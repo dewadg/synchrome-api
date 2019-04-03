@@ -900,6 +900,137 @@
                 ]
             }
         },
+        "/tpp": {
+            "get": {
+                "tags": [
+                    "TPP"
+                ],
+                "summary": "Fetch list of TPPs.",
+                "operationId": "tppIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of TPPs."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "TPP"
+                ],
+                "summary": "Create a new TPP.",
+                "operationId": "tppStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateTppRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/tpp/{id}": {
+            "get": {
+                "tags": [
+                    "TPP"
+                ],
+                "summary": "Fetch a TPP.",
+                "operationId": "tppShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A TPP."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "TPP"
+                ],
+                "summary": "Delete a TPP.",
+                "operationId": "tppDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "TPP"
+                ],
+                "summary": "Update TPP.",
+                "operationId": "tppUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateTppRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/workshifts": {
             "get": {
                 "tags": [
@@ -1257,6 +1388,30 @@
                     "items": {
                         "type": "number"
                     }
+                }
+            }
+        },
+        "CreateTppRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Tpp",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Class Tpp",
+                    "type": "number"
+                }
+            }
+        },
+        "UpdateTppRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class Tpp",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Class Tpp",
+                    "type": "number"
                 }
             }
         },

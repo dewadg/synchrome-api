@@ -192,3 +192,24 @@ $router->delete('echelons/{id}', [
     'uses' => 'EchelonController@destroy',
     'middleware' => ['auth'],
 ]);
+
+$router->get('tpp', [
+    'uses' => 'TppController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('tpp', [
+    'uses' => 'TppController@store',
+    'middleware' => ['auth'],
+]);
+$router->get('tpp/{id}', [
+    'uses' => 'TppController@show',
+    'middleware' => ['auth'],
+]);
+$router->patch('tpp/{id}', [
+    'uses' => 'TppController@update',
+    'middleware' => ['auth'],
+]);
+$router->delete('tpp/{id}', [
+    'uses' => 'TppController@destroy',
+    'middleware' => ['auth'],
+]);
