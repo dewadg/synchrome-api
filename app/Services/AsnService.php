@@ -80,7 +80,6 @@ class AsnService
             'tpp_id' => $data['tpp_id'],
             'workshift_id' => $data['workshift_id'],
             'calendar_id' => $data['calendar_id'],
-            'pin' => $data['pin'],
             'name' => $data['name'],
             'phone' => $data['phone'],
             'address' => $data['address'],
