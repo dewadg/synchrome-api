@@ -91,10 +91,8 @@ class AsnController extends RestController
         ]);
 
         try {
-            $asn = null;
-
-            DB::transaction(function () use ($request, &$asn) {
-                $asn = $this->service->create([
+            $asn = DB::transaction(function () use ($request) {
+                return $this->service->create([
                     'id' => $request->input('id'),
                     'agency_id' => $request->input('agencyId'),
                     'rank_id' => $request->input('rankId'),

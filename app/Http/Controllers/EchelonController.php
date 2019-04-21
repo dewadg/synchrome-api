@@ -100,10 +100,8 @@ class EchelonController extends RestController
         ]);
 
         try {
-            $echelon = null;
-
-            DB::transaction(function () use ($request, &$echelon) {
-                $echelon = $this->service->create([
+            $echelon = DB::transaction(function () use ($request) {
+                return $this->service->create([
                     'id' => $request->input('id'),
                     'name' => $request->input('name'),
                     'echelon_type_id' => $request->input('echelonTypeId'),

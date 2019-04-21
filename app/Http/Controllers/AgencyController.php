@@ -82,10 +82,8 @@ class AgencyController extends RestController
         ]);
 
         try {
-            $agency = null;
-
-            DB::transaction(function () use ($request, &$agency) {
-                $agency = $this->service->create([
+            $agency = DB::transaction(function () use ($request) {
+                return $this->service->create([
                     'id' => $request->input('id'),
                     'name' => $request->input('name'),
                     'phone' => $request->input('phone'),
