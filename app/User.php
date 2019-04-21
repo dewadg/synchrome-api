@@ -24,6 +24,46 @@ use Swagger\Annotations as SWG;
  *          type="string"
  *     )
  * )
+ *
+ * @SWG\Definition(
+ *     definition="CreateUserRequest",
+ *     @SWG\Property(
+ *          property="name",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="fullName",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="password",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="passwordConf",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="roleId",
+ *          type="number"
+ *     )
+ * )
+ *
+ * @SWG\Definition(
+ *     definition="UpdateUserRequest",
+ *     @SWG\Property(
+ *          property="name",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="fullName",
+ *          type="string"
+ *     ),
+ *     @SWG\Property(
+ *          property="roleId",
+ *          type="number"
+ *     )
+ * )
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {

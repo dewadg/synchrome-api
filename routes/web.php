@@ -236,3 +236,25 @@ $router->delete('asn/{id}', [
     'uses' => 'AsnController@destroy',
     'middleware' => ['auth'],
 ]);
+
+// Users
+$router->get('users', [
+    'uses' => 'UserController@index',
+    'middleware' => ['auth'],
+]);
+$router->post('users', [
+    'uses' => 'UserController@store',
+    'middleware' => ['auth'],
+]);
+$router->get('users/{id}', [
+    'uses' => 'UserController@show',
+    'middleware' => ['auth'],
+]);
+$router->patch('users/{id}', [
+    'uses' => 'UserController@update',
+    'middleware' => ['auth'],
+]);
+$router->delete('users/{id}', [
+    'uses' => 'UserController@destroy',
+    'middleware' => ['auth'],
+]);

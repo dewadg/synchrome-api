@@ -1162,6 +1162,137 @@
                 ]
             }
         },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Fetch list of users.",
+                "operationId": "usersIndex",
+                "responses": {
+                    "200": {
+                        "description": "List of users."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new User.",
+                "operationId": "usersStore",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Fetch a user.",
+                "operationId": "usersShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A user."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete a user.",
+                "operationId": "usersDestroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Deleted."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user.",
+                "operationId": "usersUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUserRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/workshifts": {
             "get": {
                 "tags": [
@@ -1643,6 +1774,46 @@
                 "password": {
                     "description": "Class User",
                     "type": "string"
+                }
+            }
+        },
+        "CreateUserRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "fullName": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "passwordConf": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "roleId": {
+                    "description": "Class User",
+                    "type": "number"
+                }
+            }
+        },
+        "UpdateUserRequest": {
+            "properties": {
+                "name": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "fullName": {
+                    "description": "Class User",
+                    "type": "string"
+                },
+                "roleId": {
+                    "description": "Class User",
+                    "type": "number"
                 }
             }
         },
