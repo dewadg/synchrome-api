@@ -193,6 +193,7 @@ $router->delete('echelons/{id}', [
     'middleware' => ['auth'],
 ]);
 
+// TPP
 $router->get('tpp', [
     'uses' => 'TppController@index',
     'middleware' => ['auth'],
@@ -214,6 +215,7 @@ $router->delete('tpp/{id}', [
     'middleware' => ['auth'],
 ]);
 
+// ASN
 $router->get('asn', [
     'uses' => 'AsnController@index',
     'middleware' => ['auth'],
