@@ -30,6 +30,7 @@ class AsnTransformer extends TransformerAbstract
             'name' => $asn->name,
             'phone' => $asn->phone,
             'address' => $asn->address,
+            'pin' => $asn->pin,
         ];
     }
 
