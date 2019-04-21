@@ -62,7 +62,7 @@ class UserService
      *
      * @param $id
      * @param array $data
-     * @return User
+     * @return bool
      */
     public function update($id, array $data)
     {
@@ -79,7 +79,7 @@ class UserService
      * Deletes a user by ID.
      *
      * @param $id
-     * @return boolean
+     * @return bool
      */
     public function delete($id)
     {
