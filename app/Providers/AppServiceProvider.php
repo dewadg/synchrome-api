@@ -12,6 +12,7 @@ use App\Repositories\EchelonTypeRepo;
 use App\Repositories\RankRepo;
 use App\Repositories\RoleRepo;
 use App\Repositories\TppRepo;
+use App\Repositories\UserRepo;
 use App\Repositories\WorkshiftRepo;
 use App\Services\AgencyService;
 use App\Services\AsnService;
@@ -21,6 +22,7 @@ use App\Services\EchelonService;
 use App\Services\RankService;
 use App\Services\RoleService;
 use App\Services\TppService;
+use App\Services\UserService;
 use App\Services\WorkshiftService;
 use Illuminate\Support\ServiceProvider;
 
@@ -76,6 +78,11 @@ class AppServiceProvider extends ServiceProvider
         // Register AsnService
         $this->app->bind(AsnService::class, function () {
             return new AsnService(new AsnRepo);
+        });
+
+        // Register UserService
+        $this->app->bind(UserService::class, function () {
+            return new UserService(new UserRepo);
         });
     }
 }
