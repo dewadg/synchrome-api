@@ -20,6 +20,8 @@ class AgencyTransformer extends TransformerAbstract
             'name' => $agency->name,
             'phone' => $agency->phone,
             'address' => $agency->address,
+            'createdAt' => $agency->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $agency->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

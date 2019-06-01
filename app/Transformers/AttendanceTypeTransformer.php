@@ -22,6 +22,8 @@ class AttendanceTypeTransformer extends TransformerAbstract
             'tppPaid' => $attendance_type->tpp_paid,
             'mealAllowancePaid' => $attendance_type->meal_allowance_paid,
             'manualInput' => $attendance_type->manual_input,
+            'createdAt' => $attendance_type->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $attendance_type->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

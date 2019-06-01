@@ -18,6 +18,8 @@ class RankTransformer extends TransformerAbstract
         return [
             'id' => $rank->id,
             'name' => $rank->name,
+            'createdAt' => $rank->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $rank->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

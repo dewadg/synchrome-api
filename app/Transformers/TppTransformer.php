@@ -19,6 +19,8 @@ class TppTransformer extends TransformerAbstract
             'id' => $tpp->id,
             'name' => $tpp->name,
             'value' => $tpp->value,
+            'createdAt' => $tpp->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $tpp->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

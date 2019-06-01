@@ -24,6 +24,8 @@ class CalendarTransformer extends TransformerAbstract
             'start' => $calendar->start->format('Y-m-d'),
             'end' => $calendar->end->format('Y-m-d'),
             'published' => $calendar->published,
+            'createdAt' => $calendar->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $calendar->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 
