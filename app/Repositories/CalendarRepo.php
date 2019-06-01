@@ -8,14 +8,7 @@ class CalendarRepo implements RepositoryInterface
 {
     public function get()
     {
-        return Calendar::with(['events', 'events.attendanceType'])
-            ->get([
-                'id',
-                'name',
-                'start',
-                'end',
-                'published',
-            ]);
+        return Calendar::with(['events', 'events.attendanceType'])->get();
     }
 
     public function find($id)

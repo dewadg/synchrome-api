@@ -8,7 +8,7 @@ class RankRepo implements RepositoryInterface
 {
     public function get()
     {
-        return Rank::get(['id', 'name']);
+        return Rank::get();
     }
 
     public function find($id)
