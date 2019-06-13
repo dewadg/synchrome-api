@@ -166,6 +166,10 @@ $router->delete('agencies/{id}', [
     'uses' => 'AgencyController@destroy',
     'middleware' => ['auth'],
 ]);
+$router->get('agencies/{id}/asn', [
+    'uses' => 'AgencyController@getAsn',
+    'middleware' => ['auth'],
+]);
 
 // Echelons
 $router->get('echelon-types', [
