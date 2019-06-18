@@ -16,7 +16,7 @@ class CreateFingerprintsTable extends Migration
         Schema::create('fingerprints', function (Blueprint $table) {
             $table->increments('id');
             $table->string('asn_id');
-            $table->integer('index');
+            $table->integer('idx');
             $table->integer('alg_ver');
             $table->text('template');
             $table->timestamps();
