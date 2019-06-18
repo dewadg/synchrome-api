@@ -187,4 +187,14 @@ class Asn extends Model
     {
         return $this->belongsTo(Calendar::class);
     }
+
+    /**
+     * This ASN's fingerprints.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function fingerprints()
+    {
+        return $this->hasMany(Fingerprint::class);
+    }
 }
