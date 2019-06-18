@@ -44,6 +44,7 @@ class FingerprintServiceTest extends TestCase
 
         $actual = $this->test_fingerprint_service->register($asn->id, $data);
 
+        $this->assertInstanceOf(Fingerprint::class, $actual);
         $this->assertEquals($actual->idx, $data['idx']);
         $this->assertEquals($actual->alg_ver, $data['alg_ver']);
         $this->assertEquals($actual->template, $data['template']);
