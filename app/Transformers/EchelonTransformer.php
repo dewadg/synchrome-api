@@ -28,6 +28,8 @@ class EchelonTransformer extends TransformerAbstract
                 'name' => $echelon->type->name,
             ],
             'supervisor' => $supervisor,
+            'createdAt' => $echelon->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $echelon->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

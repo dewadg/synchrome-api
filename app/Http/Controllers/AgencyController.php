@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\AgencyService;
 use App\Transformers\AgencyTransformer;
+use App\Transformers\AsnTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -82,10 +83,8 @@ class AgencyController extends RestController
         ]);
 
         try {
-            $agency = null;
-
-            DB::transaction(function () use ($request, &$agency) {
-                $agency = $this->service->create([
+            $agency = DB::transaction(function () use ($request) {
+                return $this->service->create([
                     'id' => $request->input('id'),
                     'name' => $request->input('name'),
                     'phone' => $request->input('phone'),
@@ -223,6 +222,42 @@ class AgencyController extends RestController
             return response()->json();
         } catch (ModelNotFoundException $e) {
             return $this->notFoundResponse($e->getMessage());
+        } catch (\Exception $e) {
+            return $this->iseResponse($e->getMessage());
+        }
+    }
+
+    /**
+     *@SWG\Get(
+     *     path="/agencies/{id}/asn",
+     *     tags={"Agencies"},
+     *     operationId="agenciesGetAsn",
+     *     summary="Fetch ASN of an agency.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="ASN list from an agency."
+     *     ),
+     *     @SWG\Response(
+     *         response=404,
+     *         description="Not found."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAsn($id)
+    {
+        try {
+            return $this->sendCollection($this->service->getAsn($id), AsnTransformer::class);
         } catch (\Exception $e) {
             return $this->iseResponse($e->getMessage());
         }

@@ -18,6 +18,8 @@ class EchelonTypeTransformer extends TransformerAbstract
         return [
             'id' => $type->id,
             'name' => $type->name,
+            'createdAt' => $type->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $type->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

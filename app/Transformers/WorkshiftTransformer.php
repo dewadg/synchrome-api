@@ -23,6 +23,8 @@ class WorkshiftTransformer extends TransformerAbstract
         return [
             'id' => $workshift->id,
             'name' => $workshift->name,
+            'createdAt' => $workshift->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $workshift->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 

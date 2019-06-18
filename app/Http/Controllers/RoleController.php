@@ -64,16 +64,14 @@ class RoleController extends RestController
         ]);
 
         try {
-            $rank = null;
-            
-            DB::transaction(function () use ($service, $request, &$rank) {
-                $rank = $service->create([
+            $role = DB::transaction(function () use ($service, $request) {
+                return $service->create([
                     'name' => $request->input('name'),
                     'accesses' => $request->input('accesses'),
                 ]);
             });
 
-            return $this->sendItem($rank, null, 201);
+            return $this->sendItem($role, null, 201);
         } catch (\Exception $e) {
             return $this->iseResponse($e->getMessage());
         }

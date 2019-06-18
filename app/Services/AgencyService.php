@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Agency;
+use App\Asn;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Support\Collection;
 
@@ -107,5 +108,25 @@ class AgencyService
     public function delete($id)
     {
         return $this->repo->delete($id);
+    }
+
+    /**
+     * Get ASN of an agency.
+     *
+     * @param $id
+     * @return Collection
+     */
+    public function getAsn($id)
+    {
+        return Asn::with([
+            'agency',
+            'rank',
+            'echelon',
+            'tpp',
+            'workshift',
+            'calendar',
+        ])
+            ->where('agency_id', $id)
+            ->get();
     }
 }

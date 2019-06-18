@@ -82,10 +82,8 @@ class TppController extends RestController
         ]);
 
         try {
-            $tpp = null;
-
-            DB::transaction(function () use ($request, &$tpp) {
-                $tpp = $this->service->create([
+            $tpp = DB::transaction(function () use ($request) {
+                return $this->service->create([
                     'name' => $request->input('name'),
                     'value' => $request->input('value'),
                 ]);

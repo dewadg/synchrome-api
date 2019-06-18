@@ -31,6 +31,8 @@ class AsnTransformer extends TransformerAbstract
             'phone' => $asn->phone,
             'address' => $asn->address,
             'pin' => $asn->pin,
+            'createdAt' => $asn->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $asn->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 

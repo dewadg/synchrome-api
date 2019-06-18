@@ -69,10 +69,8 @@ class WorkshiftController extends RestController
         ]);
 
         try {
-            $workshift = null;
-
-            DB::transaction(function () use ($service, $request, &$workshift) {
-                $workshift = $service->create([
+            $workshift = DB::transaction(function () use ($service, $request) {
+                return $service->create([
                     'name' => $request->input('name'),
                     'details' => collect($request->input('details'))->map(function ($item) {
                         return [

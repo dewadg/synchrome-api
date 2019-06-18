@@ -8,7 +8,7 @@ class AttendanceTypeRepo implements RepositoryInterface
 {
     public function get()
     {
-        return AttendanceType::get(['id', 'name']);
+        return AttendanceType::get();
     }
 
     public function find($id)

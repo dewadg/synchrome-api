@@ -17,10 +17,13 @@ class WorkshiftDetailTransformer extends TransformerAbstract
     public function transform(WorkshiftDetail $detail)
     {
         return [
+            'id' => $detail->id,
             'index' => $detail->index,
             'checkIn' => $detail->check_in,
             'checkOut' => $detail->check_out,
             'active' => $detail->active,
+            'createdAt' => $detail->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $detail->updated_at->format('Y-m-d H:i:s'),
         ];
     }
 }

@@ -89,7 +89,7 @@ class UserController extends RestController
                 return $this->service->create([
                     'name' => $request->input('name'),
                     'full_name' => $request->input('fullName'),
-                    'password' => app('hash')->make($request->input('password')),
+                    'password' => $request->input('password'),
                     'role_id' => $request->input('roleId'),
                 ]);
             });
