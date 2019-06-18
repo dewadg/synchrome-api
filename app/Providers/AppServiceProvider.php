@@ -19,6 +19,7 @@ use App\Services\AsnService;
 use App\Services\AuthService;
 use App\Services\CalendarService;
 use App\Services\EchelonService;
+use App\Services\FingerprintService;
 use App\Services\RankService;
 use App\Services\RoleService;
 use App\Services\TppService;
@@ -83,6 +84,11 @@ class AppServiceProvider extends ServiceProvider
         // Register UserService
         $this->app->bind(UserService::class, function () {
             return new UserService(new UserRepo);
+        });
+
+        // Register FingerprintService
+        $this->app->bind(FingerprintService::class, function () {
+            return new FingerprintService;
         });
     }
 }
