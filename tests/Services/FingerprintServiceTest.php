@@ -49,4 +49,19 @@ class FingerprintServiceTest extends TestCase
         $this->assertEquals($actual->alg_ver, $data['alg_ver']);
         $this->assertEquals($actual->template, $data['template']);
     }
+
+    public function testDelete()
+    {
+        $asn = Asn::first();
+        $data = [
+            'idx' => 1,
+            'alg_ver' => 3,
+            'template' => $this->faker->name,
+        ];
+
+        $fingerprint = $this->test_fingerprint_service->register($asn->id, $data);
+        $actual = $this->test_fingerprint_service->delete($asn->id, $fingerprint->id);
+
+        $this->assertTrue($actual);
+    }
 }

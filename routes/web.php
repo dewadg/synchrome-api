@@ -244,6 +244,10 @@ $router->post('asn/{id}/fingerprints', [
     'uses' => 'AsnController@registerFingerprint',
     'middleware' => ['auth'],
 ]);
+$router->delete('asn/{asn_id}/fingerprints/{fingerprint_id}', [
+    'uses' => 'AsnController@destroyFingerprint',
+    'middleware' => ['auth'],
+]);
 
 // Users
 $router->get('users', [

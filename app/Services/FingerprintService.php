@@ -22,4 +22,19 @@ class FingerprintService
             'template' => $data['template'],
         ]);
     }
+
+    /**
+     * Delete a fingerprint.
+     *
+     * @param $id
+     * @return boolean
+     */
+    public function delete($asn_id, $id)
+    {
+        return Fingerprint::where([
+            'id' => $id,
+            'asn_id' => $asn_id,
+        ])->firstOrFail()
+        ->delete();
+    }
 }

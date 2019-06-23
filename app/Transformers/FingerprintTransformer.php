@@ -16,6 +16,7 @@ class FingerprintTransformer extends TransformerAbstract
     public function transform(Fingerprint $fingerprint)
     {
         return [
+            'id' => $fingerprint->id,
             'idx' => $fingerprint->idx,
             'algVer' => $fingerprint->alg_ver,
             'template' => $fingerprint->template,

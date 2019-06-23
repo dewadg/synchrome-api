@@ -303,4 +303,46 @@ class AsnController extends RestController
             return $this->notFoundResponse('ASN not found');
         }
     }
+
+    /**
+     * @SWG\Get(
+     *     path="/asn/{asn_id}/fingerprints/{fingerprint_id}",
+     *     tags={"ASN"},
+     *     operationId="asnDestroyFingerprint",
+     *     summary="Delete a fingerprint",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="asn_id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="fingerprint_id",
+     *         required=true
+     *     ),
+     *     @SWG\Response(
+     *         response=200,
+     *         description="Deleted."
+     *     )
+     * )
+     *
+     * @param $asn_id
+     * @param $fingerprint_id
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function destroyFingerprint($asn_id, $fingerprint_id)
+    {
+        try {
+            DB::transaction(function () use ($asn_id, $fingerprint_id) {
+                $this->fingerprint_service->delete($asn_id, $fingerprint_id);
+            });
+
+            return response()->json();
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('ASN not found');
+        }
+    }
 }
