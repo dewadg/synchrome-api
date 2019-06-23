@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\AsnService;
+use App\Services\FingerprintService;
 use App\Transformers\AsnTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -21,15 +22,21 @@ class AsnController extends RestController
     protected $service;
 
     /**
+     * @var FingerprintService
+     */
+    protected $fingerprint_service;
+
+    /**
      * AsnController Constructor.
      *
      * @param AsnService $service
      */
-    public function __construct(AsnService $service)
+    public function __construct(AsnService $service, FingerprintService $fingerprint_service)
     {
         parent::__construct();
 
         $this->service = $service;
+        $this->fingerprint_service = $fingerprint_service;
     }
 
     /**
@@ -237,6 +244,58 @@ class AsnController extends RestController
         try {
             DB::transaction(function () use ($id) {
                 $this->service->delete($id);
+            });
+
+            return response()->json();
+        } catch (ModelNotFoundException $e) {
+            return $this->notFoundResponse('ASN not found');
+        }
+    }
+
+    /**
+     * @SWG\Post(
+     *     path="/asn/{id}/fingerprints",
+     *     tags={"ASN"},
+     *     operationId="asnRegisterFingerprint",
+     *     summary="Register new fingerprint.",
+     *     security={{"basicAuth":{}}},
+     *     @SWG\Parameter(
+     *         in="path",
+     *         type="string",
+     *         name="id",
+     *         required=true
+     *     ),
+     *     @SWG\Parameter(
+     *         name="params",
+     *         in="body",
+     *         required=true,
+     *         @SWG\Schema(ref="#/definitions/RegisterFingerprintRequest")
+     *     ),
+     *     @SWG\Response(
+     *         response=201,
+     *         description="Created."
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param $id
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function registerFingerprint(Request $request, $id)
+    {
+        $this->validate($request, [
+            'idx' => 'required',
+            'algVer' => 'required',
+            'template' => 'required',
+        ]);
+
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $this->fingerprint_service->register($id, [
+                    'idx' => $request->input('idx'),
+                    'alg_ver' => $request->input('algVer'),
+                    'template' => $request->input('template'),
+                ]);
             });
 
             return response()->json();

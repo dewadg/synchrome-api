@@ -4,6 +4,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Fingerprint
+ * @package App
+ *
+ * @SWG\Definition(
+ *     definition="RegisterFingerprintRequest",
+ *     @SWG\Property(
+ *         property="idx",
+ *         type="integer"
+ *     ),
+ *     @SWG\Property(
+ *         property="algVer",
+ *         type="integer"
+ *     ),
+ *     @SWG\Property(
+ *         property="template",
+ *         type="string"
+ *     )
+ * )
+ */
 class Fingerprint extends Model
 {
     /**

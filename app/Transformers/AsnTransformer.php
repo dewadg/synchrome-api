@@ -5,6 +5,7 @@ namespace App\Transformers;
 use App\Asn;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Item;
+use League\Fractal\Resource\Collection;
 
 class AsnTransformer extends TransformerAbstract
 {
@@ -15,6 +16,7 @@ class AsnTransformer extends TransformerAbstract
         'tpp',
         'workshift',
         'calendar',
+        'fingerprints',
     ];
 
     /**
@@ -100,5 +102,16 @@ class AsnTransformer extends TransformerAbstract
     public function includeCalendar(Asn $asn)
     {
         return $this->item($asn->calendar, new CalendarTransformer);
+    }
+
+    /**
+     * Include Fingerprints.
+     *
+     * @param Asn $asn
+     * @return Collection
+     */
+    public function includeFingerprints(Asn $asn)
+    {
+        return $this->collection($asn->fingerprints, new FingerprintTransformer);
     }
 }
