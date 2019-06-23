@@ -145,6 +145,36 @@
                 ]
             }
         },
+        "/agencies/{id}/asn": {
+            "get": {
+                "tags": [
+                    "Agencies"
+                ],
+                "summary": "Fetch ASN of an agency.",
+                "operationId": "agenciesGetAsn",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ASN list from an agency."
+                    },
+                    "404": {
+                        "description": "Not found."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/asn": {
             "get": {
                 "tags": [
@@ -267,6 +297,41 @@
                 "responses": {
                     "200": {
                         "description": "Updated."
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/asn/{id}/fingerprints": {
+            "post": {
+                "tags": [
+                    "ASN"
+                ],
+                "summary": "Register new fingerprint.",
+                "operationId": "asnRegisterFingerprint",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "params",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RegisterFingerprintRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created."
                     }
                 },
                 "security": [
@@ -1687,6 +1752,22 @@
                 },
                 "supervisorId": {
                     "description": "Class Echelon",
+                    "type": "string"
+                }
+            }
+        },
+        "RegisterFingerprintRequest": {
+            "properties": {
+                "idx": {
+                    "description": "Class Fingerprint",
+                    "type": "integer"
+                },
+                "algVer": {
+                    "description": "Class Fingerprint",
+                    "type": "integer"
+                },
+                "template": {
+                    "description": "Class Fingerprint",
                     "type": "string"
                 }
             }
