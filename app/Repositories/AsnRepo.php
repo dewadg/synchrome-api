@@ -13,6 +13,7 @@ class AsnRepo implements RepositoryInterface
         'tpp',
         'workshift',
         'calendar',
+        'fingerprints',
     ];
 
     public function get()
