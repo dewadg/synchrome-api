@@ -15,9 +15,11 @@ class FingerprintService
      */
     public function register($asn_id, array $data)
     {
+        $fingerprint_count = Fingerprint::where('asn_id', $asn_id)->count();
+
         return Fingerprint::create([
             'asn_id' => $asn_id,
-            'idx' => $data['idx'],
+            'idx' => ($fingerprint_count + 1),
             'alg_ver' => $data['alg_ver'],
             'template' => $data['template'],
         ]);
